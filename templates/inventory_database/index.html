@@ -1,0 +1,59 @@
+{% extends "inventory_database/base.html" %}
+
+{% block content %}
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+    <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+  </header>
+
+  <div class="w3-row-padding w3-margin-bottom">
+    <div class="w3-quarter">
+      <div class="w3-container w3-red w3-padding-16">
+        <div class="w3-left"><a href="/inventory_database/about/"><i class="fa fa-desktop w3-xxxlarge"></i></a></div>
+        <div class="w3-right">
+          <h3>{{ inv_count }}</h3> 
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Total Inventory</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-blue w3-padding-16">
+        <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>{{ emp_count }}</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Employees</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-teal w3-padding-16">
+        <div class="w3-left"><i class="fa fa-desktop w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>{{ IT_inv_count }}</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Information Technology Computers</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-orange w3-text-white w3-padding-16">
+        <div class="w3-left"><i class="fa fa-desktop w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>{{ HR_inv_count }}</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Human Resource Computers</h4>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- End page content -->
+</div>
+{% endblock content %}
