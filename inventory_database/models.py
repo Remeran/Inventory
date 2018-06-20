@@ -70,8 +70,7 @@ class Software(Asset):
     developer = models.CharField(max_length=128)
     lic_exp = models.DateField()
     assigned_dept = models.CharField(max_length=128)
-    lisence_type = models.CharField(max_length=128)
-    date_assigned = models.DateField()
+    license_type = models.CharField(max_length=128)
     license_used = models.IntegerField(default=0)
 	
     class Meta:

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from inventory_database.models import Fac
 from inventory_database.models import Employee
-from inventory_database.forms import FacForm
+from inventory_database.forms import FacForm, EmployeeForm, Lab_ClassroomForm, StudentForm, SoftwareForm
 
 def index(request):
     

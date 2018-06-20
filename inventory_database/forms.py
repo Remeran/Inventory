@@ -66,28 +66,31 @@ class StudentForm(forms.ModelForm):
 	serial = forms.CharField(max_length=128, help_text="Please enter Asset's Serial")
 	manufacturer = forms.CharField(max_length=128, help_text="Please enter Asset's manufacturer")
 	model = forms.CharField(max_length=128, help_text="Please enter Asset's Model")
-	assignee = forms.ModelChoiceField(queryset=Employee.objects.all())
+	war_exp = forms.DateField(help_text="Please enter Warranty Expiration date")
+	date_assigned = forms.DateField(help_text="Please enter assignment date")
+	room = forms.ModelChoiceField(queryset=Lab_Classroom.objects.all())
 	
 	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
 	# An inline class to provide additional information on the form.
 	class Meta:
 		# Provide an association between the ModelForm and a model
-		model = Fac
-		fields = ('name', 'serial', 'manufacturer', 'model', 'assignee',)
+		model = Student
+		fields = ('name', 'serial', 'manufacturer', 'model', 'war_exp', 'date_assigned', 'room',)
 		
 class SoftwareForm(forms.ModelForm):
 	name = forms.CharField(max_length=128,
 							help_text="Please enter the Asset's name.")
-	serial = forms.CharField(max_length=128, help_text="Please enter Asset's Serial")
-	manufacturer = forms.CharField(max_length=128, help_text="Please enter Asset's manufacturer")
-	model = forms.CharField(max_length=128, help_text="Please enter Asset's Model")
-	assignee = forms.ModelChoiceField(queryset=Employee.objects.all())
+	developer = forms.CharField(max_length=128, help_text="Please enter the developer")
+	lic_exp = forms.DateField(help_text="Please enter license expiration date")
+	assigned_dept = forms.CharField(max_length=128, help_text="Please enter assigned department")
+	license_type = forms.CharField(max_length=128, help_text="Please enter license type")
+	license_used = forms.IntegerField()
 	
 	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
 	# An inline class to provide additional information on the form.
 	class Meta:
 		# Provide an association between the ModelForm and a model
-		model = Fac
-		fields = ('name', 'serial', 'manufacturer', 'model', 'assignee',)
+		model = Software
+		fields = ('name', 'developer', 'lic_exp', 'assigned_dept', 'license_type', 'license_used',)

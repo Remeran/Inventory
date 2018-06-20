@@ -1,0 +1,28 @@
+{% extends "inventory_database/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<!-- !PAGE CONTENT! -->
+<div class="w3-display-middle">
+<header class="w3-container" style="padding-top:22px">
+	<h5><b><i class="fa fa-sign-in"></i> Sign in</b></h5>
+</header>
+
+<form class="login-form w3-container" method="post" action=".">
+	{% csrf_token %} 
+	<p>
+		Username:
+		{{ form.username|add_class:"w3-input w3-animate-input" }}
+		{{ form.username.errors }}
+	</p>
+	<p>
+		Password:
+		{{ form.password|add_class:"w3-input w3-animate-input" }}
+		{{ form.password.errors }}
+	</p>
+	<button class="w3-btn w3-black" type="submit" value="Log in" >Login</button>
+	<input type="hidden" name="next" value="{{ next }}" />
+    <p class="message">Contact an admin to create an account</p>
+</form>
+</div>
+{% endblock content %}

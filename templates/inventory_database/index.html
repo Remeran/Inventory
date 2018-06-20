@@ -2,6 +2,7 @@
 
 {% block content %}
 <!-- !PAGE CONTENT! -->
+{% if user.is_authenticated %}
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
   <!-- Header -->
@@ -56,4 +57,10 @@
 
   <!-- End page content -->
 </div>
+{% else %}
+<div class="w3-display-middle">
+	<h1>La Salle University - Inventory</h1> 
+	<p>Please Sign in to continue.</p>
+</div>
+{% endif %}
 {% endblock content %}
