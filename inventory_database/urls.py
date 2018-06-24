@@ -1,9 +1,11 @@
 from django.conf.urls import url
 from inventory_database import views
 
+
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^about/', views.about, name='about'),
-    url(r'^add_category/$', views.add_category, name='add_category'),
-    url(r'^category/(?P<category_name_slug>[\w\-]+)/$', views.show_category, name='show_category'),
+	url(r'^search/$', views.search, name='search'),
+    url(r'^add_asset/$', views.add_asset, name='add_asset'),
+    #url(r'^asset/(?P<asset_name_slug>[\w\-]+)/$', views.show_asset, name='show_asset'),
 ]

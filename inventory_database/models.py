@@ -29,6 +29,12 @@ class Lab_Classroom(models.Model):
 
 # Asset is an abstract class that can be inherited from
 class Asset(models.Model):
+    SEARCH_CHOICES = (
+        (1 , 'Name'),
+        (2 , 'Serial'),
+        (3 , 'Model'),
+        (4 , 'Manufacturer'),
+    )
     name = models.CharField(max_length=128, unique=True)
     slug = models.SlugField()
 
@@ -55,10 +61,10 @@ class Hardware(Asset):
         abstract = True
 # Fac is a class that inherits from	Hardware and Assets	
 class Fac(Hardware):
-    asignee = models.ForeignKey(Employee)
+    assignee = models.ForeignKey(Employee, blank=True, null=True)
 	
     class Meta:
-        verbose_name_plural = 'Faculty/Staff Computers'	
+        verbose_name_plural = 'Faculty/Staff Computers'
 
 class Student(Hardware):
     room = models.ForeignKey(Lab_Classroom)

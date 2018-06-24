@@ -2,21 +2,7 @@ from django import forms
 from django.core.validators import MaxValueValidator
 from inventory_database.models import Employee, Fac, Lab_Classroom, Asset, Hardware, Student, Software
 
-class FacForm(forms.ModelForm):
-	name = forms.CharField(max_length=128,
-							help_text="Please enter the Asset's name.")
-	serial = forms.CharField(max_length=128, help_text="Please enter Asset's Serial")
-	manufacturer = forms.CharField(max_length=128, help_text="Please enter Asset's manufacturer")
-	model = forms.CharField(max_length=128, help_text="Please enter Asset's Model")
-	assignee = forms.ModelChoiceField(queryset=Employee.objects.all())
-	
-	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
-	# An inline class to provide additional information on the form.
-	class Meta:
-		# Provide an association between the ModelForm and a model
-		model = Fac
-		fields = ('name', 'serial', 'manufacturer', 'model', 'assignee',)
 
 class EmployeeForm(forms.ModelForm):
     id = forms.IntegerField(validators=[MaxValueValidator(9999999)])
@@ -34,13 +20,14 @@ class EmployeeForm(forms.ModelForm):
 		
 class FacForm(forms.ModelForm):
 	name = forms.CharField(max_length=128,
-							help_text="Please enter the Asset's name.")
-	serial = forms.CharField(max_length=128, help_text="Please enter Asset's Serial")
-	manufacturer = forms.CharField(max_length=128, help_text="Please enter Asset's manufacturer")
-	model = forms.CharField(max_length=128, help_text="Please enter Asset's Model")
-	war_exp = forms.DateField(help_text="Please enter Warranty Expiration date")
-	date_assigned = forms.DateField(help_text="Please enter assignment date")
-	assignee = forms.ModelChoiceField(queryset=Employee.objects.all())
+							help_text="Computer Name.")
+	serial = forms.CharField(max_length=128, help_text="Serial")
+	manufacturer = forms.CharField(max_length=128, help_text="Manufacturer")
+	model = forms.CharField(max_length=128, help_text="Model")
+	war_exp = forms.DateField(widget=forms.SelectDateWidget(), help_text="Warranty Expiration date")
+	date_assigned = forms.DateField(widget=forms.SelectDateWidget(),help_text="Assignment date:")
+
+	assignee = forms.ModelChoiceField(queryset=Employee.objects.all(), required=False, help_text="Assignee")
 	
 	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
@@ -48,6 +35,7 @@ class FacForm(forms.ModelForm):
 	class Meta:
 		# Provide an association between the ModelForm and a model
 		model = Fac
+		#Removed 'assignee', to test adding asset with an assignee
 		fields = ('name', 'serial', 'manufacturer', 'model', 'war_exp', 'date_assigned', 'assignee',)
 		
 class Lab_ClassroomForm(forms.ModelForm):
@@ -94,3 +82,22 @@ class SoftwareForm(forms.ModelForm):
 		# Provide an association between the ModelForm and a model
 		model = Software
 		fields = ('name', 'developer', 'lic_exp', 'assigned_dept', 'license_type', 'license_used',)
+		
+class SearchForm(forms.ModelForm):
+	search_by = forms.ChoiceField(choices=Asset.SEARCH_CHOICES, 
+								 help_text="Search By: ")
+	searchName = forms.CharField(required=False, max_length=128,
+							 help_text="Search (leave blank to browse by category):")
+							 
+	searchSerial = forms.CharField(required=False, max_length=128,
+							 help_text="Search by Serial:")
+							 
+	searchModel = forms.CharField(required=False, max_length=128,
+							 help_text="Search by Model:")
+							 
+	searchManufacturer = forms.CharField(required=False, max_length=128,
+							 help_text="Search by manufacturer:")
+	
+	class Meta:
+		model = Asset
+		fields = ('search_by','searchName', 'searchSerial', 'searchModel', 'searchManufacturer', )

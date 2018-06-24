@@ -5,8 +5,8 @@
 </head>
 <body>
 	<div>
-	{% if category %}
-		<h1>{{ category.name }}</h1>
+	{% if asset %}
+		<h1>{{ asset.name }}</h1>
 		{% if pages %}
 			<ul>
 			{% for page in pages %}
@@ -14,10 +14,10 @@
 			{% endfor %}
 			</ul>
 		{% else %}
-			<strong>No pages currently in category.</strong>
+			<strong>No pages currently in asset.</strong>
 		{% endif %}
 	{% else %}
-		The specified Category doesn't exist!
+		The specified asset doesn't exist!
 	{% endif %}
 	</div>
 	<div>
