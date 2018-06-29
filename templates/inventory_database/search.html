@@ -10,24 +10,48 @@ function Hide() {
          document.getElementById('id_searchSerial').style.display = 'none';
 		 document.getElementById('id_searchModel').style.display = 'none';
 		 document.getElementById('id_searchManufacturer').style.display = 'none';
+		 document.getElementById('id_searchAssignee').style.display = 'none';
+		 document.getElementById('id_searchRoom').style.display = 'none';
     }
     if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '2') {
          document.getElementById('id_searchName').style.display = 'none';
          document.getElementById('id_searchSerial').style.display = '';
 		 document.getElementById('id_searchModel').style.display = 'none';
 		 document.getElementById('id_searchManufacturer').style.display = 'none';
+		 document.getElementById('id_searchAssignee').style.display = 'none';
+		 document.getElementById('id_searchRoom').style.display = 'none';
     }
     if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '3') {
          document.getElementById('id_searchName').style.display = 'none';
          document.getElementById('id_searchSerial').style.display = 'none';
 		 document.getElementById('id_searchModel').style.display = '';
 		 document.getElementById('id_searchManufacturer').style.display = 'none';
+		 document.getElementById('id_searchAssignee').style.display = 'none';
+		 document.getElementById('id_searchRoom').style.display = 'none';
     }
     if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '4') {
          document.getElementById('id_searchName').style.display = 'none';
          document.getElementById('id_searchSerial').style.display = 'none';
 		 document.getElementById('id_searchModel').style.display = 'none';
 		 document.getElementById('id_searchManufacturer').style.display = '';
+		 document.getElementById('id_searchAssignee').style.display = 'none';
+		 document.getElementById('id_searchRoom').style.display = 'none';
+    }
+    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '5') {
+         document.getElementById('id_searchName').style.display = 'none';
+         document.getElementById('id_searchSerial').style.display = 'none';
+		 document.getElementById('id_searchModel').style.display = 'none';
+		 document.getElementById('id_searchManufacturer').style.display = 'none';
+		 document.getElementById('id_searchAssignee').style.display = '';
+		 document.getElementById('id_searchRoom').style.display = 'none';
+    }
+    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '6') {
+         document.getElementById('id_searchName').style.display = 'none';
+         document.getElementById('id_searchSerial').style.display = 'none';
+		 document.getElementById('id_searchModel').style.display = 'none';
+		 document.getElementById('id_searchManufacturer').style.display = 'none';
+		 document.getElementById('id_searchAssignee').style.display = 'none';
+		 document.getElementById('id_searchRoom').style.display = '';
     }
 }
 
@@ -37,6 +61,8 @@ window.onload = function() {
     document.getElementById('id_searchSerial').style.display = 'none';
 	document.getElementById('id_searchModel').style.display = 'none';
 	document.getElementById('id_searchManufacturer').style.display = 'none';
+	document.getElementById('id_searchAssignee').style.display = 'none';
+	document.getElementById('id_searchRoom').style.display = 'none';
 };
 </script>
 

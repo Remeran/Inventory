@@ -35,7 +35,6 @@ class FacForm(forms.ModelForm):
 	class Meta:
 		# Provide an association between the ModelForm and a model
 		model = Fac
-		#Removed 'assignee', to test adding asset with an assignee
 		fields = ('name', 'serial', 'manufacturer', 'model', 'war_exp', 'date_assigned', 'assignee',)
 		
 class Lab_ClassroomForm(forms.ModelForm):
@@ -97,7 +96,22 @@ class SearchForm(forms.ModelForm):
 							 
 	searchManufacturer = forms.CharField(required=False, max_length=128,
 							 help_text="Search by manufacturer:")
+							 
+	searchAssignee = forms.CharField(required=False, max_length=128,
+							 help_text="Search by Assignee:")
+							 
+	searchRoom = forms.CharField(required=False, max_length=128,
+							 help_text="Search by Room:")
 	
 	class Meta:
 		model = Asset
-		fields = ('search_by','searchName', 'searchSerial', 'searchModel', 'searchManufacturer', )
+		fields = ('search_by','searchName', 'searchSerial', 'searchModel', 'searchManufacturer', 'searchAssignee', 'searchRoom', )
+
+class UpdateFacForm(forms.ModelForm):
+	date_assigned = forms.DateField(widget=forms.SelectDateWidget(),help_text="Assignment date:")
+	assignee = forms.ModelChoiceField(queryset=Employee.objects.all(), required=False, help_text="Assignee")
+	# An inline class to provide additional information on the form.
+	class Meta:
+		# Provide an association between the ModelForm and a model
+		model = Fac
+		fields = ('assignee', 'date_assigned',)

@@ -1,27 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>inventory_database</title>
-</head>
-<body>
-	<div>
-	{% if asset %}
-		<h1>{{ asset.name }}</h1>
-		{% if pages %}
-			<ul>
-			{% for page in pages %}
-				<li><a href="{{ page.url }}">{{ page.title }}</a></li>
-			{% endfor %}
-			</ul>
-		{% else %}
-			<strong>No pages currently in asset.</strong>
-		{% endif %}
+{% extends "inventory_database/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+  <!-- Header -->
+	<header class="w3-container" style="padding-top:22px">
+		<h5><b><i class="fa fa-desktop"></i> {{ Asset.name }}</b></h5>
+	</header>
+	{% if Asset %}
+		<form id="asset_form" method="post" action="{% url 'show_asset' Asset.slug %}">
+		{% csrf_token %}
+		<table class="w3-table w3-striped w3-white w3-hoverable">
+		<tr>
+			<td><b>Serial Number:</b></td>
+			<td>{{ Asset.serial }}</td>
+		</tr>
+		<tr>
+			<td><b>Manufacturer:</b></td>
+			<td>{{ Asset.manufacturer }}</td>
+		</tr>
+		<tr>
+			<td><b>Model:</b></td>
+			<td>{{ Asset.model }}</td>
+		</tr>
+		<tr>
+			<td><b>Warranty Expires:</b></td>
+			<td>{{ Asset.war_exp }}</td>
+		</tr>
+		<tr>
+			<td><b>Date Assigned:</b></td>
+			<td>{{ form.date_assigned }}</td>
+		</tr>
+		<tr>
+			<td><b>Assignee:</b></td>
+			<td>{{ form.assignee }}  <a href=# />Details</q></td>
+		</tr>
+		</table>
+	<div class="w3-container" style="padding-top:22px">
+		<button class="w3-btn w3-black" type="submit" name="submit" value="ok" />Update</button>
+	</div>
+	</form>
+		</div>
 	{% else %}
 		The specified asset doesn't exist!
 	{% endif %}
-	</div>
-	<div>
-		<a href="/inventory_database/">Home</a><br />
-	</div>
-</body>
-</html>
+</div>
+{% endblock %}

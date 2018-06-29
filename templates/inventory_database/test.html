@@ -1,27 +1,4 @@
-{% extends "inventory_database/base.html" %}
-{% load widget_tweaks %}
-
-{% block content %}
-<!-- !PAGE CONTENT! -->
-
-<div class="w3-display-middle">
-  <!-- Header -->
-	<header class="w3-container" style="padding-top:22px">
-		<h5><b><i class="fa fa-search"></i> Search Inventory</b></h5>
-	</header>
-			<form id="search" method="post" action="/inventory_database/search/">
-				{% csrf_token %}
-				{% for hidden in form.hidden_fields %}
-					{{ hidden }}
-				{% endfor %}
-				{% for field in form.visible_fields %}
-					{{ field.errors }}
-					{{ label_tag }}
-					<b>{{ field.help_text }}</b>
-					<p>{{ field|add_class:"w3-input w3-animate-input" }}</p>
-				{% endfor %}
-				<button class="w3-btn w3-black" type="submit" name="submit" value="Search">SEARCH</button></p>
-				<button onclick="myFunction()">Try it</button>
-			</form>
-</div>
-{% endblock content %}
+		<form class="update-form w3-container" method="post" action="/inventory_database/asset/">
+			{{ form }}
+		<button class="w3-btn w3-black" type="submit" value="Update" >Update</button>
+		</form>
