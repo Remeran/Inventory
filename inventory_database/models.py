@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.core.validators import MaxValueValidator
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
 
@@ -82,6 +83,13 @@ class Software(Asset):
     license_used = models.IntegerField(default=0)
 	
     class Meta:
-        verbose_name_plural = 'Software'	
+        verbose_name_plural = 'Software'
+
+class Editor(models.Model):
+	user = models.OneToOneField(User)
+	is_editor = models.BooleanField(default=False)
+	
+	def __str__(self): 
+		return self.user.username		
 
 

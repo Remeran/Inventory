@@ -8,8 +8,7 @@
 		<h5><b><i class="fa fa-desktop"></i> {{ Asset.name }}</b></h5>
 	</header>
 	{% if Asset %}
-		<form id="asset_form" method="post" action="{% url 'show_asset' Asset.slug %}">
-		{% csrf_token %}
+		{% if user.get_username not in editors %}
 		<table class="w3-table w3-striped w3-white w3-hoverable">
 		<tr>
 			<td><b>Serial Number:</b></td>
@@ -29,12 +28,56 @@
 		</tr>
 		<tr>
 			<td><b>Date Assigned:</b></td>
+			<td>{{ Asset.date_assigned }}</td>
+		</tr>
+		{% if is_fac %}
+		<tr>
+			<td><b>Assignee:</b></td>
+			<td>{{ Asset.assignee }}  <a href=# />Details</q></td>
+		</tr>
+		{% else %}
+		<tr>
+			<td><b>Room:</b></td>
+			<td>{{ Asset.room }}  <a href=# />Details</q></td>
+		</tr>
+		{% endif %}
+		</table>
+		{% else %}
+		<form id="asset_form" method="post" action="{% url 'show_asset' Asset.slug %}">
+		{% csrf_token %}
+		<table class="w3-table w3-striped w3-white w3-hoverable">
+		<tr>
+			<td><b>Serial Number:</b></td>
+			<td>{{ form.serial }} {{ form.errors }}</td>
+		</tr>
+		<tr>
+			<td><b>Manufacturer:</b></td>
+			<td>{{ form.manufacturer }}</td>
+		</tr>
+		<tr>
+			<td><b>Model:</b></td>
+			<td>{{ form.model }}</td>
+		</tr>
+		<tr>
+			<td><b>Warranty Expires:</b></td>
+			<td>{{ form.war_exp }}</td>
+		</tr>
+		<tr>
+			<td><b>Date Assigned:</b></td>
 			<td>{{ form.date_assigned }}</td>
 		</tr>
+		{% if is_fac %}
 		<tr>
 			<td><b>Assignee:</b></td>
 			<td>{{ form.assignee }}  <a href=# />Details</q></td>
 		</tr>
+		{% else %}
+		<tr>
+			<td><b>Room:</b></td>
+			<td>{{ form.room }}  <a href=# />Details</q></td>
+		</tr>
+		{% endif %}
+		{% endif %}
 		</table>
 	<div class="w3-container" style="padding-top:22px">
 		<button class="w3-btn w3-black" type="submit" name="submit" value="ok" />Update</button>

@@ -11,10 +11,10 @@
 	<div class="w3-row-padding w3-margin-bottom">
 	<table id="asset_table" class="w3-table w3-striped w3-white w3-hoverable">
     <tr>
-		<td onclick=sortTable()><b>Asset Name</b></td>
-		<td><b>Serial Number</b></td>
-		<td onclick=sortTableMan() ><b>Manufacturer</b></td>
-		<td onclick=sortTableMod()><b>Model</b></td>
+		<th onclick=sortTable()><b>Asset Name</b></th>
+		<th><b>Serial Number</b></th>
+		<th onclick=sortTableMan() ><b>Manufacturer</b></th>
+		<th onclick=sortTableMod()><b>Model</b></th>
     </tr>
 	{% if inventory_fac or inventory_student %}
 	{% for asset in inventory_fac %}
@@ -35,6 +35,13 @@
 		{% endfor %}
 		{% endif %}
 	</table>
+	<div class="w3-container" style="padding-top:22px">
+	<table class="w3-table w3-full w3-white w3-hoverable">
+	<p>
+		<b>TOTAL: {{ total }}</b>
+	</p>
+	</table>
+	</div>
 </div>
 
 <script>

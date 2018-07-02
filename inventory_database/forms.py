@@ -1,4 +1,5 @@
 from django import forms
+from registration.forms import RegistrationFormUniqueEmail
 from django.core.validators import MaxValueValidator
 from inventory_database.models import Employee, Fac, Lab_Classroom, Asset, Hardware, Student, Software
 
@@ -108,10 +109,30 @@ class SearchForm(forms.ModelForm):
 		fields = ('search_by','searchName', 'searchSerial', 'searchModel', 'searchManufacturer', 'searchAssignee', 'searchRoom', )
 
 class UpdateFacForm(forms.ModelForm):
+	serial = forms.CharField(max_length=128, help_text="Serial")
+	manufacturer = forms.CharField(max_length=128, help_text="Manufacturer")
+	model = forms.CharField(max_length=128, help_text="Model")
+	war_exp = forms.DateField(widget=forms.SelectDateWidget(), help_text="Warranty Expiration date")
 	date_assigned = forms.DateField(widget=forms.SelectDateWidget(),help_text="Assignment date:")
 	assignee = forms.ModelChoiceField(queryset=Employee.objects.all(), required=False, help_text="Assignee")
 	# An inline class to provide additional information on the form.
 	class Meta:
 		# Provide an association between the ModelForm and a model
 		model = Fac
-		fields = ('assignee', 'date_assigned',)
+		fields = ('assignee', 'date_assigned', 'war_exp', 'model', 'manufacturer', 'serial')
+		
+class UpdateStudentForm(forms.ModelForm):
+	serial = forms.CharField(max_length=128, help_text="Please enter Asset's Serial")
+	manufacturer = forms.CharField(max_length=128, help_text="Please enter Asset's manufacturer")
+	model = forms.CharField(max_length=128, help_text="Please enter Asset's Model")
+	war_exp = forms.DateField(widget=forms.SelectDateWidget(), help_text="Please enter Warranty Expiration date")
+	date_assigned = forms.DateField(widget=forms.SelectDateWidget(),help_text="Assignment date:")
+	room = forms.ModelChoiceField(queryset=Lab_Classroom.objects.all(), help_text="Location")
+	# An inline class to provide additional information on the form.
+	class Meta:
+		# Provide an association between the ModelForm and a model
+		model = Fac
+		fields = ('assignee', 'room', 'war_exp', 'model', 'manufacturer', 'serial')
+		
+class EditorForm(RegistrationFormUniqueEmail):
+    is_editor = forms.BooleanField(initial=False, help_text="Check to add user to Editors")

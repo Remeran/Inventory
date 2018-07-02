@@ -38,9 +38,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 	{% if user.is_authenticated %}
     <a href="/inventory_database/" {% if request.path == "/inventory_database/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-users fa-fw"></i>Home</a>
     <a href="/inventory_database/about/" {% if request.path == "/inventory_database/about/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-eye fa-fw"></i>Browse</a>
-	<a href="/inventory_database/add_asset/" {% if request.path == "/inventory_database/add_asset/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-plus fa-fw"></i>Add Asset</a>
     <a href="/inventory_database/search/" {% if request.path == "/inventory_database/search/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-search fa-fw"></i>Search</a>
+	{% if user.get_username in editors %}
 	<a href="/accounts/register/" {% if request.path == "/accounts/register" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-edit fa-fw"></i>Add User</a>
+	<a href="/inventory_database/add_asset/" {% if request.path == "/inventory_database/add_asset/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-plus fa-fw"></i>Add Asset</a>
+	{% endif %}
 	<a href="/accounts/logout/" {% if request.path == "/accounts/logout" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-sign-out fa-fw"></i>Sign Out</a>
 	<a href="/accounts/password/change/" {% if request.path == "/accounts/logout" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-sign-out fa-fw"></i>Change Password</a>
 	{% else %}
