@@ -12,18 +12,28 @@ class Employee(models.Model):
     title = models.CharField(max_length=128)
     department = models.CharField(max_length=128)
     office = models.CharField(max_length=128)
+    slug = models.SlugField()
 
     def __str__(self):
         return self.name
+		
+    def save(self, *args, **kwargs):
+		self.slug = slugify(self.id)
+		super(Employee, self).save(*args, **kwargs)
 
 class Lab_Classroom(models.Model):
     room = models.CharField(max_length=128)
     comp_count = models.IntegerField(default=0)
     building = models.CharField(max_length=128)
     dept = models.CharField(max_length=128)
+    slug = models.SlugField()
 
     def __str__(self):
         return self.room
+
+    def save(self, *args, **kwargs):
+		self.slug = slugify(self.room)
+		super(Lab_Classroom, self).save(*args, **kwargs)
 		
     class Meta:
         verbose_name_plural = 'Labs/Classrooms'

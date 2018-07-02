@@ -1,0 +1,61 @@
+{% extends "inventory_database/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+  <!-- Header -->
+	<header class="w3-container" style="padding-top:22px">
+		<h5><b><i class="fa fa-address-card"></i> {{ employee.name }}</b></h5>
+	</header>
+	{% if employee %}
+		{% if user.get_username not in editors %}
+		<table class="w3-table w3-striped w3-white w3-hoverable">
+		<tr>
+			<td><b>ID:</b></td>
+			<td>{{ employee.id }}</td>
+		</tr>
+		<tr>
+			<td><b>Title:</b></td>
+			<td>{{ employee.title }}</td>
+		</tr>
+		<tr>
+			<td><b>Department:</b></td>
+			<td>{{ employee.department }}</td>
+		</tr>
+		<tr>
+			<td><b>Office Location:</b></td>
+			<td>{{ employee.office }}</td>
+		</tr>
+		</table>
+		{% else %}
+		<form id="employee_form" method="post" action="{% url 'show_employee' employee.slug %}">
+		{% csrf_token %}
+		<table class="w3-table w3-striped w3-white w3-hoverable">
+		<tr>
+			<td><b>ID:</b></td>
+			<td>{{ form.id }} {{ form.errors }}</td>
+		</tr>
+		<tr>
+			<td><b>Title:</b></td>
+			<td>{{ form.title }}</td>
+		</tr>
+		<tr>
+			<td><b>Department:</b></td>
+			<td>{{ form.department }}</td>
+		</tr>
+		<tr>
+			<td><b>Office Location:</b></td>
+			<td>{{ form.office }}</td>
+		</tr>
+		</table>
+	<div class="w3-container" style="padding-top:22px">
+		<button class="w3-btn w3-black" type="submit" name="submit" value="ok" />Update</button>
+	</div>
+	</form>
+		</div>
+		{% endif %}
+	{% else %}
+		The specified employee doesn't exist!
+	{% endif %}
+</div>
+{% endblock %}

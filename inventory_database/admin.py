@@ -12,10 +12,13 @@ class StudentAdmin(admin.ModelAdmin):
 class SoftwareAdmin(admin.ModelAdmin):
 	prepopulated_fields = {'slug':('name',)}
 	
-
+class Lab_ClassroomAdmin(admin.ModelAdmin):
+	prepopulated_fields = {'slug':('room',)}
+	
 
 class EmployeeAdmin(admin.ModelAdmin):
 	list_display = ('name', 'department', 'office')
+	prepopulated_fields = {'slug':('id',)}
 
 admin.site.register(Employee, EmployeeAdmin)
 admin.site.register(Fac, FacAdmin)

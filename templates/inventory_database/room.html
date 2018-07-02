@@ -1,0 +1,53 @@
+{% extends "inventory_database/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+  <!-- Header -->
+	<header class="w3-container" style="padding-top:22px">
+		<h5><b><i class="fa fa-info"></i> {{ room.room }}</b></h5>
+	</header>
+	{% if room %}
+		{% if user.get_username not in editors %}
+		<table class="w3-table w3-striped w3-white w3-hoverable">
+		<tr>
+			<td><b>Number of Computers:</b></td>
+			<td>{{ room.comp_count }}</td>
+		</tr>
+		<tr>
+			<td><b>Building:</b></td>
+			<td>{{ room.building }}</td>
+		</tr>
+		<tr>
+			<td><b>Department:</b></td>
+			<td>{{ room.dept }}</td>
+		</tr>
+		</table>
+		{% else %}
+		<form id="room_form" method="post" action="{% url 'show_room' room.slug %}">
+		{% csrf_token %}
+		<table class="w3-table w3-striped w3-white w3-hoverable">
+		<tr>
+			<td><b>Number of Computers:</b></td>
+			<td>{{ room.comp_count }}</td>
+		</tr>
+		<tr>
+			<td><b>Building:</b></td>
+			<td>{{ form.building }}</td>
+		</tr>
+		<tr>
+			<td><b>Department:</b></td>
+			<td>{{ form.dept }}</td>
+		</tr>
+		</table>
+	<div class="w3-container" style="padding-top:22px">
+		<button class="w3-btn w3-black" type="submit" name="submit" value="ok" />Update</button>
+	</div>
+	</form>
+		</div>
+		{% endif %}
+	{% else %}
+		The specified room doesn't exist!
+	{% endif %}
+</div>
+{% endblock %}

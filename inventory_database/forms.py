@@ -6,15 +6,17 @@ from inventory_database.models import Employee, Fac, Lab_Classroom, Asset, Hardw
 
 
 class EmployeeForm(forms.ModelForm):
-    id = forms.IntegerField(validators=[MaxValueValidator(9999999)])
-    name = forms.CharField(max_length=128,
-							help_text="Please enter the name of the assignee")
-    title = forms.CharField(max_length=128, help_text="Please enter Employee's title")   
-    department = forms.CharField(max_length=128, help_text="Please enter Employee's department")
-    office = forms.CharField(max_length=128, help_text="Please enter Employee's office number")
+	id = forms.IntegerField(validators=[MaxValueValidator(9999999)], help_text="(Required: please enter the user's ID number) Employee ID:")
+	name = forms.CharField(max_length=128,
+							help_text="Employee Name:")
+	title = forms.CharField(max_length=128, help_text="Employee Title")   
+	department = forms.CharField(max_length=128, help_text="Employee Department:")
+	office = forms.CharField(max_length=128, help_text="Employee Office:")
+	
+	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 	
 
-    class Meta:
+	class Meta:
 
 		model = Employee
 		fields = ('id', 'name', 'title', 'department', 'office',)
@@ -136,3 +138,23 @@ class UpdateStudentForm(forms.ModelForm):
 		
 class EditorForm(RegistrationFormUniqueEmail):
     is_editor = forms.BooleanField(initial=False, help_text="Check to add user to Editors")
+	
+class UpdateEmployeeForm(forms.ModelForm):
+    id = forms.IntegerField(validators=[MaxValueValidator(9999999)])
+    title = forms.CharField(max_length=128, help_text="Please enter Employee's title")   
+    department = forms.CharField(max_length=128, help_text="Please enter Employee's department")
+    office = forms.CharField(max_length=128, help_text="Please enter Employee's office number")
+	
+
+    class Meta:
+
+		model = Employee
+		fields = ('id', 'title', 'department', 'office',)
+		
+class UpdateLab_ClassroomForm(forms.ModelForm):
+	building = forms.CharField(max_length=128, help_text="Please enter Lab/Classroom location")
+	dept = forms.CharField(max_length=128, help_text="Please enter school in charge of lab")
+
+	class Meta:
+		model = Lab_Classroom
+		fields = ('building', 'dept',)

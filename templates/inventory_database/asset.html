@@ -33,12 +33,12 @@
 		{% if is_fac %}
 		<tr>
 			<td><b>Assignee:</b></td>
-			<td>{{ Asset.assignee }}  <a href=# />Details</q></td>
+			<td>{{ Asset.assignee }}  <a href="{% url 'show_employee' employee.slug %}" />Details</q></td>
 		</tr>
 		{% else %}
 		<tr>
 			<td><b>Room:</b></td>
-			<td>{{ Asset.room }}  <a href=# />Details</q></td>
+			<td>{{ Asset.room }}  <a href="{% url 'show_room' room.slug %}" />Details</q></td>
 		</tr>
 		{% endif %}
 		</table>
@@ -69,21 +69,21 @@
 		{% if is_fac %}
 		<tr>
 			<td><b>Assignee:</b></td>
-			<td>{{ form.assignee }}  <a href=# />Details</q></td>
+			<td>{{ form.assignee }}  <a href="{% url 'show_employee' employee.slug %}" />Details</q></td>
 		</tr>
 		{% else %}
 		<tr>
 			<td><b>Room:</b></td>
-			<td>{{ form.room }}  <a href=# />Details</q></td>
+			<td>{{ form.room }}  <a href="{% url 'show_room' room.slug %}" />Details</q></td>
 		</tr>
 		{% endif %}
-		{% endif %}
 		</table>
-	<div class="w3-container" style="padding-top:22px">
-		<button class="w3-btn w3-black" type="submit" name="submit" value="ok" />Update</button>
-	</div>
-	</form>
+		<div class="w3-container" style="padding-top:22px">
+			<button class="w3-btn w3-black" type="submit" name="submit" value="ok" />Update</button>
 		</div>
+		</form>
+		</div>
+		{% endif %}
 	{% else %}
 		The specified asset doesn't exist!
 	{% endif %}

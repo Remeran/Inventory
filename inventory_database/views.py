@@ -8,7 +8,8 @@ from inventory_database.models import Student
 from inventory_database.models import Employee
 from inventory_database.models import Hardware
 from inventory_database.models import Editor
-from inventory_database.forms import FacForm, EmployeeForm, Lab_ClassroomForm, StudentForm, SoftwareForm, SearchForm, UpdateFacForm, UpdateStudentForm, EditorForm
+from inventory_database.models import Lab_Classroom
+from inventory_database.forms import FacForm, EmployeeForm, Lab_ClassroomForm, StudentForm, SoftwareForm, SearchForm, UpdateFacForm, UpdateStudentForm, EditorForm, UpdateEmployeeForm, UpdateLab_ClassroomForm
 
 def index(request):
     
@@ -48,6 +49,8 @@ def show_asset(request, asset_name_slug):
 		# If so asset is a faculty computer 
         asset = Fac.objects.get(slug=asset_name_slug)
         is_fac = True
+        employee = Employee.objects.get(id = asset.assignee.id)
+        context_dict['employee'] = employee
         context_dict['is_fac'] = is_fac
         form = UpdateFacForm(instance=asset)
 
@@ -66,6 +69,8 @@ def show_asset(request, asset_name_slug):
 	    #Else it is a student computer
         asset = Student.objects.get(slug=asset_name_slug)
         is_fac = False
+        room = Lab_Classroom.objects.get(room = asset.room.room)
+        context_dict['room'] = room
         context_dict['is_fac'] = is_fac
         form = UpdateStudentForm(instance=asset)
 
@@ -193,4 +198,60 @@ def faculty_staff(request):
 	
 class UserProfileRegistration(RegistrationView):
     form_class = EditorForm
+	
+def show_employee(request, employee_id_slug):
+	context_dict = {}
+	employee = Employee.objects.get(slug = employee_id_slug)
+	editor_list = Editor.objects.all().__str__()
+	form = UpdateEmployeeForm(instance=employee)
+	context_dict['employee'] = employee
+	context_dict['editors'] = editor_list
+	
+	if request.method == 'POST':
+		form = UpdateEmployeeForm(request.POST, instance=employee)
+		context_dict['form'] = form
+		
+		if form.is_valid():
+			form.save(commit=True)
+			return render(request, 'inventory_database/employee.html', context_dict)
+	context_dict['form'] = form
+	return render(request, 'inventory_database/employee.html', context_dict)
+	
+def show_room(request, room_name_slug):
+	context_dict = {}
+	room = Lab_Classroom.objects.get(slug = room_name_slug)
+	editor_list = Editor.objects.all().__str__()
+	form = UpdateLab_ClassroomForm(instance=room)
+	context_dict['room'] = room
+	context_dict['editors'] = editor_list
+	
+	if request.method == 'POST':
+		form = UpdateLab_ClassroomForm(request.POST, instance=room)
+		context_dict['form'] = form
+		
+		if form.is_valid():
+			form.save(commit=True)
+			return render(request, 'inventory_database/room.html', context_dict)
+	context_dict['form'] = form
+	return render(request, 'inventory_database/room.html', context_dict)
+	
+def add_employee(request):
+    form = EmployeeForm()
+    context_dict = {}
+    editor_list = Editor.objects.all().__str__()
+    context_dict['editors'] = editor_list
+    context_dict['form'] = form
+
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+		
+            form.save(commit=True)
+            return index(request)
+        else:
+
+            print(form.errors)
+
+
+    return render(request, 'inventory_database/add_employee.html', context_dict)
 	
