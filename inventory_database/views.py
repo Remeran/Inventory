@@ -49,8 +49,9 @@ def show_asset(request, asset_name_slug):
 		# If so asset is a faculty computer 
         asset = Fac.objects.get(slug=asset_name_slug)
         is_fac = True
-        employee = Employee.objects.get(id = asset.assignee.id)
-        context_dict['employee'] = employee
+        if asset.assignee:
+            employee = Employee.objects.get(id = asset.assignee.id)
+            context_dict['employee'] = employee
         context_dict['is_fac'] = is_fac
         form = UpdateFacForm(instance=asset)
 
@@ -314,4 +315,17 @@ def add_lab_classroom(request):
 
 
     return render(request, 'inventory_database/add_lab_classroom.html', context_dict)
+	
+def delete_asset(request, asset_name_slug):
+	context_dict = {}
+	if Fac.objects.filter(slug__icontains = asset_name_slug):
+		asset = Fac.objects.get(slug=asset_name_slug)
+		context_dict['asset'] = asset
+		asset.delete()
+	else:
+		asset = Student.objects.get(slug=asset_name_slug)
+		context_dict['asset'] = asset
+		asset.delete()
+
+	return render(request, 'inventory_database/delete_asset.html', context_dict)
 	

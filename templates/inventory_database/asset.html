@@ -5,7 +5,7 @@
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
   <!-- Header -->
 	<header class="w3-container" style="padding-top:22px">
-		<h5><b><i class="fa fa-desktop"></i> {{ Asset.name }}</b></h5>
+		<h5><b><i class="fa fa-desktop"></i> {{ Asset.name }} </b> <a id="delete" onclick="confirmDel()" href=# />Delete</a></h5>
 	</header>
 	{% if Asset %}
 		{% if user.get_username not in editors %}
@@ -69,7 +69,7 @@
 		{% if is_fac %}
 		<tr>
 			<td><b>Assignee:</b></td>
-			<td>{{ form.assignee }}  <a href="{% url 'show_employee' employee.slug %}" />Details</q></td>
+			<td>{{ form.assignee }}  {% if employee %}<a href="{% url 'show_employee' employee.slug %}" />Details</a>{% endif %}</td>
 		</tr>
 		{% else %}
 		<tr>
@@ -84,6 +84,14 @@
 		</form>
 		</div>
 		{% endif %}
+		<script>
+		function confirmDel() {
+			if (confirm("Are you sure you want to delete this item")) {
+				link = document.getElementById("delete");
+				link.href="{% url 'delete_asset' Asset.slug %}"
+			}
+		}
+		</script>
 	{% else %}
 		The specified asset doesn't exist!
 	{% endif %}

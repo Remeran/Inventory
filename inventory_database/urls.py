@@ -14,6 +14,7 @@ urlpatterns = [
 	url(r'^asset/(?P<asset_name_slug>[\w\-]+)/$', views.show_asset, name='show_asset'),
 	url(r'^employee/(?P<employee_id_slug>[\w\-]+)/$', views.show_employee, name='show_employee'),
 	url(r'^room/(?P<room_name_slug>[\w\-]+)/$', views.show_room, name='show_room'),
+	url(r'^delete/(?P<asset_name_slug>[\w\-]+)/$', views.delete_asset, name='delete_asset'),
 	url(r'^student_lab/', views.student_lab, name='student_lab'),
 	url(r'^faculty_staff/', views.faculty_staff, name='faculty_staff'),
 ]

@@ -13,24 +13,24 @@
     <tr>
 		<th onclick=sortTable()><b>Asset Name</b></th>
 		<th><b>Serial Number</b></th>
-		<th onclick=sortTableMan() ><b>Manufacturer</b></th>
-		<th onclick=sortTableMod()><b>Model</b></th>
+		<th onclick=sortTableMan() ><b>Date Assigned</b></th>
+		<th onclick=sortTableMod()><b>Warranty Expires</b></th>
     </tr>
 	{% if inventory_fac or inventory_student %}
 	{% for asset in inventory_fac %}
     <tr>
 		<td><a href="{% url 'show_asset' asset.slug %}">{{ asset.name }}</a></td>
 		<td>{{ asset.serial }}</td>
-		<td>{{ asset.manufacturer }}</td>
-		<td>{{ asset.model }}</td>
+		<td>{{ asset.date_assigned|date:"M d Y"  }}</td>
+		<td>{{ asset.war_exp|date:"M d Y"  }}</td>
     </tr>
 		{% endfor %}
 	{% for asset in inventory_student %}
     <tr>
 		<td><a href="{% url 'show_asset' asset.slug %}">{{ asset.name }}</a></td>
 		<td>{{ asset.serial }}</td>
-		<td>{{ asset.manufacturer }}</td>
-		<td>{{ asset.model }}</td>
+		<td>{{ asset.date_assigned|date:"M d Y"  }}</td>
+		<td>{{ asset.war_exp|date:"M d Y"  }}</td>
     </tr>
 		{% endfor %}
 		{% endif %}
@@ -41,6 +41,7 @@
 		<b>TOTAL: {{ total }}</b>
 	</p>
 	</table>
+	<button class="w3-btn w3-black" onclick="exportTableToCSV('computers.csv')">Export To CSV File</button>
 	</div>
 </div>
 
@@ -149,6 +150,48 @@ function sortTableMod() {
   }
 }
 
+function downloadCSV(csv, filename) {
+    var csvFile;
+    var downloadLink;
+
+    // CSV file
+    csvFile = new Blob([csv], {type: "text/csv"});
+
+    // Download link
+    downloadLink = document.createElement("a");
+
+    // File name
+    downloadLink.download = filename;
+
+    // Create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Hide download link
+    downloadLink.style.display = "none";
+
+    // Add the link to DOM
+    document.body.appendChild(downloadLink);
+
+    // Click download link
+    downloadLink.click();
+}
+
+function exportTableToCSV(filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        
+        csv.push(row.join(","));        
+    }
+
+    // Download CSV file
+    downloadCSV(csv.join("\n"), filename);
+}
 window.onload = sortTable();
 </script>
 
