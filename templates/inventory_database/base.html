@@ -40,8 +40,15 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <a href="/inventory_database/about/" {% if request.path == "/inventory_database/about/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-eye fa-fw"></i>Browse</a>
     <a href="/inventory_database/search/" {% if request.path == "/inventory_database/search/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-search fa-fw"></i>Search</a>
 	{% if user.get_username in editors %}
+	<button onclick="accordion('add-options')" class="w3-bar-item w3-button w3-padding "><i class="fa fa-plus fa-fw"></i>Add </button>
+	<div id="add-options" class="w3-container w3-hide">
+	<a href="/inventory_database/add_asset/" {% if request.path == "/inventory_database/add_asset/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-desktop fa-fw"></i> Faculty/Staff Computer</a>
+	<a href="/inventory_database/add_student/" {% if request.path == "/inventory_database/add_student/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-desktop fa-fw"></i> Lab/Classroom Computer</a>
+	<a href="/inventory_database/add_employee/" {% if request.path == "/inventory_database/add_employee/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-address-card fa-fw"></i> Employee</a>
+	<a href="{% url 'add_lab_classroom' %}" {% if request.path == "/inventory_database/add_lab_classroom/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-building fa-fw"></i> Lab/Classroom</a>
+	<a href="/inventory_database/add_software/" {% if request.path == "/inventory_database/add_software/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-folder fa-fw"></i> Software</a>
+	</div>
 	<a href="/accounts/register/" {% if request.path == "/accounts/register" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-edit fa-fw"></i>Add User</a>
-	<a href="/inventory_database/add_asset/" {% if request.path == "/inventory_database/add_asset/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-plus fa-fw"></i>Add Asset</a>
 	{% endif %}
 	<a href="/accounts/logout/" {% if request.path == "/accounts/logout" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-sign-out fa-fw"></i>Sign Out</a>
 	<a href="/accounts/password/change/" {% if request.path == "/accounts/logout" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-sign-out fa-fw"></i>Change Password</a>
@@ -80,6 +87,17 @@ function w3_close() {
     mySidebar.style.display = "none";
     overlayBg.style.display = "none";
 }
+
+
+function accordion(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+
 </script>
 </body>
 </html>

@@ -23,14 +23,14 @@ class EmployeeForm(forms.ModelForm):
 		
 class FacForm(forms.ModelForm):
 	name = forms.CharField(max_length=128,
-							help_text="Computer Name.")
-	serial = forms.CharField(max_length=128, help_text="Serial")
-	manufacturer = forms.CharField(max_length=128, help_text="Manufacturer")
+							help_text="Computer Name:")
+	serial = forms.CharField(max_length=128, help_text="Serial:")
+	manufacturer = forms.CharField(max_length=128, help_text="Manufacturer:")
 	model = forms.CharField(max_length=128, help_text="Model")
-	war_exp = forms.DateField(widget=forms.SelectDateWidget(), help_text="Warranty Expiration date")
+	war_exp = forms.DateField(widget=forms.SelectDateWidget(), help_text="Warranty Expiration date:")
 	date_assigned = forms.DateField(widget=forms.SelectDateWidget(),help_text="Assignment date:")
 
-	assignee = forms.ModelChoiceField(queryset=Employee.objects.all(), required=False, help_text="Assignee")
+	assignee = forms.ModelChoiceField(queryset=Employee.objects.all(), required=False, help_text="Assignee:")
 	
 	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
@@ -45,6 +45,7 @@ class Lab_ClassroomForm(forms.ModelForm):
 	comp_count = forms.IntegerField(widget=forms.HiddenInput(), required=False)
 	building = forms.CharField(max_length=128, help_text="Please enter Lab/Classroom location")
 	dept = forms.CharField(max_length=128, help_text="Please enter school in charge of lab")
+	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
 	class Meta:
 		model = Lab_Classroom
@@ -52,13 +53,13 @@ class Lab_ClassroomForm(forms.ModelForm):
 		
 class StudentForm(forms.ModelForm):
 	name = forms.CharField(max_length=128,
-							help_text="Please enter the Asset's name.")
-	serial = forms.CharField(max_length=128, help_text="Please enter Asset's Serial")
-	manufacturer = forms.CharField(max_length=128, help_text="Please enter Asset's manufacturer")
-	model = forms.CharField(max_length=128, help_text="Please enter Asset's Model")
-	war_exp = forms.DateField(help_text="Please enter Warranty Expiration date")
-	date_assigned = forms.DateField(help_text="Please enter assignment date")
-	room = forms.ModelChoiceField(queryset=Lab_Classroom.objects.all())
+							help_text="Computer Name: ")
+	serial = forms.CharField(max_length=128, help_text="Serial: ")
+	manufacturer = forms.CharField(max_length=128, help_text="Manufacturer: ")
+	model = forms.CharField(max_length=128, help_text="Model: ")
+	war_exp = forms.DateField(widget=forms.SelectDateWidget(), help_text="Warranty Expiration Date: ")
+	date_assigned = forms.DateField(widget=forms.SelectDateWidget(), help_text="Assignment Date")
+	room = forms.ModelChoiceField(queryset=Lab_Classroom.objects.all(), help_text="Room: ")
 	
 	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
@@ -70,12 +71,12 @@ class StudentForm(forms.ModelForm):
 		
 class SoftwareForm(forms.ModelForm):
 	name = forms.CharField(max_length=128,
-							help_text="Please enter the Asset's name.")
-	developer = forms.CharField(max_length=128, help_text="Please enter the developer")
-	lic_exp = forms.DateField(help_text="Please enter license expiration date")
-	assigned_dept = forms.CharField(max_length=128, help_text="Please enter assigned department")
-	license_type = forms.CharField(max_length=128, help_text="Please enter license type")
-	license_used = forms.IntegerField()
+							help_text="Name: ")
+	developer = forms.CharField(max_length=128, help_text="Developer")
+	lic_exp = forms.DateField(widget=forms.SelectDateWidget(),help_text="License Expiration Date: ")
+	assigned_dept = forms.CharField(max_length=128, help_text="Department: ")
+	license_type = forms.CharField(max_length=128, help_text="Type: ")
+	license_used = forms.IntegerField(help_text="Used: ")
 	
 	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 

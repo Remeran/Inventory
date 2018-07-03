@@ -255,3 +255,63 @@ def add_employee(request):
 
     return render(request, 'inventory_database/add_employee.html', context_dict)
 	
+def add_student(request):
+    form = StudentForm()
+    context_dict = {}
+    editor_list = Editor.objects.all().__str__()
+    context_dict['editors'] = editor_list
+    context_dict['form'] = form
+
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+		
+            form.save(commit=True)
+            return index(request)
+        else:
+
+            print(form.errors)
+
+
+    return render(request, 'inventory_database/add_student.html', context_dict)
+	
+def add_software(request):
+    form = SoftwareForm()
+    context_dict = {}
+    editor_list = Editor.objects.all().__str__()
+    context_dict['editors'] = editor_list
+    context_dict['form'] = form
+
+    if request.method == 'POST':
+        form = SoftwareForm(request.POST)
+        if form.is_valid():
+		
+            form.save(commit=True)
+            return index(request)
+        else:
+
+            print(form.errors)
+
+
+    return render(request, 'inventory_database/add_software.html', context_dict)
+	
+def add_lab_classroom(request):
+    form = Lab_ClassroomForm()
+    context_dict = {}
+    editor_list = Editor.objects.all().__str__()
+    context_dict['editors'] = editor_list
+    context_dict['form'] = form
+
+    if request.method == 'POST':
+        form = Lab_ClassroomForm(request.POST)
+        if form.is_valid():
+		
+            form.save(commit=True)
+            return index(request)
+        else:
+
+            print(form.errors)
+
+
+    return render(request, 'inventory_database/add_lab_classroom.html', context_dict)
+	
