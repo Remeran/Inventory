@@ -6,36 +6,27 @@
 
   <!-- Header -->
 	<header class="w3-container" style="padding-top:22px">
-		<h5><b><i class="fa fa-desktop"></i> Browse Inventory</b></h5>
+		<h5><b><i class="fa fa-users"></i> Browse Employees</b></h5>
 	</header>
 	<div class="w3-row-padding w3-margin-bottom">
-	<table id="asset_table" class="w3-table w3-striped w3-white w3-hoverable">
+	<table id="employee_table" class="w3-table w3-striped w3-white w3-hoverable">
     <tr>
-		<th onclick=sortTable()><b>Asset Name</b></th>
-		<th><b>Serial Number</b></th>
-		<th onclick=sortTableMan() ><b>Date Assigned</b></th>
-		<th onclick=sortTableMod()><b>Warranty Expires</b></th>
-		<th><b>Assignee/Room</b></th>
+		<th><b>ID Number</b></th>
+		<th onclick=sortTable()><b>Name</b></th>
+		<th onclick=sortTableTitle() ><b>Title</b></th>
+		<th onclick=sortTableDept()><b>Department</b></th>
+		<th><b>Office</b></th>
     </tr>
-	{% if inventory_fac or inventory_student %}
-	{% for asset in inventory_fac %}
+	{% if employees %}
+	{% for employee in employees %}
     <tr>
-		<td><a href="{% url 'show_asset' asset.slug %}">{{ asset.name }}</a></td>
-		<td>{{ asset.serial }}</td>
-		<td>{{ asset.date_assigned|date:"M d Y"  }}</td>
-		<td>{{ asset.war_exp|date:"M d Y"  }}</td>
-		<td>{{ asset.assignee }}</td>
+		<td><a href="{% url 'show_employee' employee.slug %}">{{ employee.id }}</a></td>
+		<td>{{ employee.name }}</td>
+		<td>{{ employee.title  }}</td>
+		<td>{{ employee.department  }}</td>
+		<td>{{ employee.office }}</td>
     </tr>
-		{% endfor %}
-	{% for asset in inventory_student %}
-    <tr>
-		<td><a href="{% url 'show_asset' asset.slug %}">{{ asset.name }}</a></td>
-		<td>{{ asset.serial }}</td>
-		<td>{{ asset.date_assigned|date:"M d Y"  }}</td>
-		<td>{{ asset.war_exp|date:"M d Y"  }}</td>
-		<td>{{ asset.room }}</td>
-    </tr>
-		{% endfor %}
+	{% endfor %}
 		{% endif %}
 	</table>
 	<div class="w3-container" style="padding-top:22px">
@@ -44,14 +35,14 @@
 		<b>TOTAL: {{ total }}</b>
 	</p>
 	</table>
-	<button class="w3-btn w3-black" onclick="exportTableToCSV('computers.csv')">Export To CSV File</button>
+	<button class="w3-btn w3-black" onclick="exportTableToCSV('employees.csv')">Export To CSV File</button>
 	</div>
 </div>
 
 <script>
 function sortTable() {
   var table, rows, switching, i, x, y, shouldSwitch;
-  table = document.getElementById("asset_table");
+  table = document.getElementById("employee_table");
   switching = true;
   /*Make a loop that will continue until
   no switching has been done:*/
@@ -66,8 +57,8 @@ function sortTable() {
       shouldSwitch = false;
       /*Get the two elements you want to compare,
       one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[0];
-      y = rows[i + 1].getElementsByTagName("TD")[0];
+      x = rows[i].getElementsByTagName("TD")[1];
+      y = rows[i + 1].getElementsByTagName("TD")[1];
       //check if the two rows should switch place:
       if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
         //if so, mark as a switch and break the loop:
@@ -83,9 +74,9 @@ function sortTable() {
     }
   }
 }
-function sortTableMan() {
+function sortTableTitle() {
   var table, rows, switching, i, x, y, shouldSwitch;
-  table = document.getElementById("asset_table");
+  table = document.getElementById("employee_table");
   switching = true;
   /*Make a loop that will continue until
   no switching has been done:*/
@@ -118,9 +109,9 @@ function sortTableMan() {
   }
 }
 
-function sortTableMod() {
+function sortTableDept() {
   var table, rows, switching, i, x, y, shouldSwitch;
-  table = document.getElementById("asset_table");
+  table = document.getElementById("employee_table");
   switching = true;
   /*Make a loop that will continue until
   no switching has been done:*/

@@ -3,92 +3,6 @@
 
 {% block content %}
 <!-- !PAGE CONTENT! -->
-<script>
-function Hide() {
-    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '1') {
-         document.getElementById('id_searchName').style.display = '';
-         document.getElementById('id_searchSerial').style.display = 'none';
-		 document.getElementById('id_searchModel').style.display = 'none';
-		 document.getElementById('id_searchManufacturer').style.display = 'none';
-		 document.getElementById('id_searchAssignee').style.display = 'none';
-		 document.getElementById('id_searchRoom').style.display = 'none';
-		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
-		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
-    }
-    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '2') {
-         document.getElementById('id_searchName').style.display = 'none';
-         document.getElementById('id_searchSerial').style.display = '';
-		 document.getElementById('id_searchModel').style.display = 'none';
-		 document.getElementById('id_searchManufacturer').style.display = 'none';
-		 document.getElementById('id_searchAssignee').style.display = 'none';
-		 document.getElementById('id_searchRoom').style.display = 'none';
-		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
-		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
-    }
-    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '3') {
-         document.getElementById('id_searchName').style.display = 'none';
-         document.getElementById('id_searchSerial').style.display = 'none';
-		 document.getElementById('id_searchModel').style.display = '';
-		 document.getElementById('id_searchManufacturer').style.display = 'none';
-		 document.getElementById('id_searchAssignee').style.display = 'none';
-		 document.getElementById('id_searchRoom').style.display = 'none';
-		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
-		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
-    }
-    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '4') {
-         document.getElementById('id_searchName').style.display = 'none';
-         document.getElementById('id_searchSerial').style.display = 'none';
-		 document.getElementById('id_searchModel').style.display = 'none';
-		 document.getElementById('id_searchManufacturer').style.display = '';
-		 document.getElementById('id_searchAssignee').style.display = 'none';
-		 document.getElementById('id_searchRoom').style.display = 'none';
-		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
-		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
-    }
-    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '5') {
-         document.getElementById('id_searchName').style.display = 'none';
-         document.getElementById('id_searchSerial').style.display = 'none';
-		 document.getElementById('id_searchModel').style.display = 'none';
-		 document.getElementById('id_searchManufacturer').style.display = 'none';
-		 document.getElementById('id_searchAssignee').style.display = '';
-		 document.getElementById('id_searchRoom').style.display = 'none';
-		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
-		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
-    }
-    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '6') {
-         document.getElementById('id_searchName').style.display = 'none';
-         document.getElementById('id_searchSerial').style.display = 'none';
-		 document.getElementById('id_searchModel').style.display = 'none';
-		 document.getElementById('id_searchManufacturer').style.display = 'none';
-		 document.getElementById('id_searchAssignee').style.display = 'none';
-		 document.getElementById('id_searchRoom').style.display = '';
-		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
-		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
-    }
-    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '7') {
-         document.getElementById('id_searchName').style.display = 'none';
-         document.getElementById('id_searchSerial').style.display = 'none';
-		 document.getElementById('id_searchModel').style.display = 'none';
-		 document.getElementById('id_searchManufacturer').style.display = 'none';
-		 document.getElementById('id_searchAssignee').style.display = 'none';
-		 document.getElementById('id_searchRoom').style.display = 'none';
-		 document.getElementById('id_searchDatebegin_month').style.display = ''; document.getElementById('id_searchDatebegin_day').style.display = ''; document.getElementById('id_searchDatebegin_year').style.display = '';
-		 document.getElementById('id_searchDateEnd_month').style.display = ''; document.getElementById('id_searchDateEnd_day').style.display = ''; document.getElementById('id_searchDateEnd_year').style.display = '';
-    }
-}
-
-window.onload = function() {
-    document.getElementById('id_search_by').onchange = Hide;
-    document.getElementById('id_searchName').style.display = '';
-    document.getElementById('id_searchSerial').style.display = 'none';
-	document.getElementById('id_searchModel').style.display = 'none';
-	document.getElementById('id_searchManufacturer').style.display = 'none';
-	document.getElementById('id_searchAssignee').style.display = 'none';
-	document.getElementById('id_searchRoom').style.display = 'none';
-	document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
-	document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
-};
-</script>
 
 <div class="w3-display-middle">
   <!-- Header -->
@@ -108,4 +22,118 @@ window.onload = function() {
 				<button class="w3-btn w3-black" type="submit" name="submit" value="Search">SEARCH</button></p>
 			</form>
 </div>
+<script>
+function Hide() {
+    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '1') {
+         document.getElementById('id_searchName').style.display = '';
+         document.getElementById('id_searchSerial').style.display = 'none';
+		 document.getElementById('id_searchModel').style.display = 'none';
+		 document.getElementById('id_searchManufacturer').style.display = 'none';
+		 document.getElementById('id_searchAssignee').style.display = 'none';
+		 document.getElementById('id_searchRoom').style.display = 'none';
+		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
+		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantybegin_month').style.display = 'none'; document.getElementById('id_searchWarrantybegin_day').style.display = 'none'; document.getElementById('id_searchWarrantybegin_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantyEnd_month').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_day').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_year').style.display = 'none';
+    }
+    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '2') {
+         document.getElementById('id_searchName').style.display = 'none';
+         document.getElementById('id_searchSerial').style.display = '';
+		 document.getElementById('id_searchModel').style.display = 'none';
+		 document.getElementById('id_searchManufacturer').style.display = 'none';
+		 document.getElementById('id_searchAssignee').style.display = 'none';
+		 document.getElementById('id_searchRoom').style.display = 'none';
+		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
+		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantybegin_month').style.display = 'none'; document.getElementById('id_searchWarrantybegin_day').style.display = 'none'; document.getElementById('id_searchWarrantybegin_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantyEnd_month').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_day').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_year').style.display = 'none';
+    }
+    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '3') {
+         document.getElementById('id_searchName').style.display = 'none';
+         document.getElementById('id_searchSerial').style.display = 'none';
+		 document.getElementById('id_searchModel').style.display = '';
+		 document.getElementById('id_searchManufacturer').style.display = 'none';
+		 document.getElementById('id_searchAssignee').style.display = 'none';
+		 document.getElementById('id_searchRoom').style.display = 'none';
+		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
+		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantybegin_month').style.display = 'none'; document.getElementById('id_searchWarrantybegin_day').style.display = 'none'; document.getElementById('id_searchWarrantybegin_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantyEnd_month').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_day').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_year').style.display = 'none';
+    }
+    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '4') {
+         document.getElementById('id_searchName').style.display = 'none';
+         document.getElementById('id_searchSerial').style.display = 'none';
+		 document.getElementById('id_searchModel').style.display = 'none';
+		 document.getElementById('id_searchManufacturer').style.display = '';
+		 document.getElementById('id_searchAssignee').style.display = 'none';
+		 document.getElementById('id_searchRoom').style.display = 'none';
+		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
+		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantybegin_month').style.display = 'none'; document.getElementById('id_searchWarrantybegin_day').style.display = 'none'; document.getElementById('id_searchWarrantybegin_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantyEnd_month').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_day').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_year').style.display = 'none';
+    }
+    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '5') {
+         document.getElementById('id_searchName').style.display = 'none';
+         document.getElementById('id_searchSerial').style.display = 'none';
+		 document.getElementById('id_searchModel').style.display = 'none';
+		 document.getElementById('id_searchManufacturer').style.display = 'none';
+		 document.getElementById('id_searchAssignee').style.display = '';
+		 document.getElementById('id_searchRoom').style.display = 'none';
+		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
+		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantybegin_month').style.display = 'none'; document.getElementById('id_searchWarrantybegin_day').style.display = 'none'; document.getElementById('id_searchWarrantybegin_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantyEnd_month').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_day').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_year').style.display = 'none';
+    }
+    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '6') {
+         document.getElementById('id_searchName').style.display = 'none';
+         document.getElementById('id_searchSerial').style.display = 'none';
+		 document.getElementById('id_searchModel').style.display = 'none';
+		 document.getElementById('id_searchManufacturer').style.display = 'none';
+		 document.getElementById('id_searchAssignee').style.display = 'none';
+		 document.getElementById('id_searchRoom').style.display = '';
+		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
+		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantybegin_month').style.display = 'none'; document.getElementById('id_searchWarrantybegin_day').style.display = 'none'; document.getElementById('id_searchWarrantybegin_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantyEnd_month').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_day').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_year').style.display = 'none';
+    }
+    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '7') {
+         document.getElementById('id_searchName').style.display = 'none';
+         document.getElementById('id_searchSerial').style.display = 'none';
+		 document.getElementById('id_searchModel').style.display = 'none';
+		 document.getElementById('id_searchManufacturer').style.display = 'none';
+		 document.getElementById('id_searchAssignee').style.display = 'none';
+		 document.getElementById('id_searchRoom').style.display = 'none';
+		 document.getElementById('id_searchDatebegin_month').style.display = ''; document.getElementById('id_searchDatebegin_day').style.display = ''; document.getElementById('id_searchDatebegin_year').style.display = '';
+		 document.getElementById('id_searchDateEnd_month').style.display = ''; document.getElementById('id_searchDateEnd_day').style.display = ''; document.getElementById('id_searchDateEnd_year').style.display = '';
+		 document.getElementById('id_searchWarrantybegin_month').style.display = 'none'; document.getElementById('id_searchWarrantybegin_day').style.display = 'none'; document.getElementById('id_searchWarrantybegin_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantyEnd_month').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_day').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_year').style.display = 'none';
+    }
+    if(document.getElementById('id_search_by').options[document.getElementById('id_search_by').selectedIndex].value == '8') {
+         document.getElementById('id_searchName').style.display = 'none';
+         document.getElementById('id_searchSerial').style.display = 'none';
+		 document.getElementById('id_searchModel').style.display = 'none';
+		 document.getElementById('id_searchManufacturer').style.display = 'none';
+		 document.getElementById('id_searchAssignee').style.display = 'none';
+		 document.getElementById('id_searchRoom').style.display = 'none';
+		 document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
+		 document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
+		 document.getElementById('id_searchWarrantybegin_month').style.display = ''; document.getElementById('id_searchWarrantybegin_day').style.display = ''; document.getElementById('id_searchWarrantybegin_year').style.display = '';
+		 document.getElementById('id_searchWarrantyEnd_month').style.display = ''; document.getElementById('id_searchWarrantyEnd_day').style.display = ''; document.getElementById('id_searchWarrantyEnd_year').style.display = '';
+    }
+}
+
+window.onload = function() {
+    document.getElementById('id_search_by').onchange = Hide;
+    document.getElementById('id_searchName').style.display = '';
+    document.getElementById('id_searchSerial').style.display = 'none';
+	document.getElementById('id_searchModel').style.display = 'none';
+	document.getElementById('id_searchManufacturer').style.display = 'none';
+	document.getElementById('id_searchAssignee').style.display = 'none';
+	document.getElementById('id_searchRoom').style.display = 'none';
+	document.getElementById('id_searchDatebegin_month').style.display = 'none'; document.getElementById('id_searchDatebegin_day').style.display = 'none'; document.getElementById('id_searchDatebegin_year').style.display = 'none';
+	document.getElementById('id_searchDateEnd_month').style.display = 'none'; document.getElementById('id_searchDateEnd_day').style.display = 'none'; document.getElementById('id_searchDateEnd_year').style.display = 'none';
+	document.getElementById('id_searchWarrantybegin_month').style.display = 'none'; document.getElementById('id_searchWarrantybegin_day').style.display = 'none'; document.getElementById('id_searchWarrantybegin_year').style.display = 'none';
+	document.getElementById('id_searchWarrantyEnd_month').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_day').style.display = 'none'; document.getElementById('id_searchWarrantyEnd_year').style.display = 'none';
+};
+</script>
 {% endblock content %}

@@ -23,7 +23,7 @@
     </div>
     <div class="w3-quarter">
       <div class="w3-container w3-blue w3-padding-16">
-        <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+        <div class="w3-left"><a href="{% url 'browse_employees' %}"><i class="fa fa-users w3-xxxlarge"></i></a></div>
         <div class="w3-right">
           <h3>{{ emp_count }}</h3>
         </div>
@@ -49,6 +49,26 @@
         </div>
         <div class="w3-clear"></div>
         <h4>Student/Lab Computers</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-indigo w3-text-white w3-padding-16">
+        <div class="w3-left"><a href="{% url 'browse_labs_classrooms' %}"><i class="fa fa-building w3-xxxlarge"></i></a></div>
+        <div class="w3-right">
+          <h3>{{ lab_classroom_count }}</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Labs/Classrooms</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-amber w3-text-white w3-padding-16">
+        <div class="w3-left"><a href="{% url 'browse_labs_classrooms' %}"><i class="fa fa-folder w3-xxxlarge"></i></a></div>
+        <div class="w3-right">
+          <h3>{{ software_count }}</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Software</h4>
       </div>
     </div>
   </div>

@@ -9,6 +9,7 @@ from inventory_database.models import Employee
 from inventory_database.models import Hardware
 from inventory_database.models import Editor
 from inventory_database.models import Lab_Classroom
+from inventory_database.models import Software
 from inventory_database.forms import FacForm, EmployeeForm, Lab_ClassroomForm, StudentForm, SoftwareForm, SearchForm, UpdateFacForm, UpdateStudentForm, EditorForm, UpdateEmployeeForm, UpdateLab_ClassroomForm
 
 def index(request):
@@ -17,12 +18,16 @@ def index(request):
     employee_count = Employee.objects.count()
     fac_count = Fac.objects.count()
     student_count = Student.objects.count()
+    lab_classroom_count = Lab_Classroom.objects.count()
+    software_count = Software.objects.count()
     editor_list = Editor.objects.all().__str__()
     context_dict = {}
     context_dict['inv_count'] = inventory_count
     context_dict['emp_count'] = employee_count
     context_dict['fac_count'] = fac_count
     context_dict['student_count'] = student_count
+    context_dict['lab_classroom_count'] = lab_classroom_count
+    context_dict['software_count'] = software_count
     editor_list = Editor.objects.all().__str__()
     context_dict['editors'] = editor_list
 
@@ -40,6 +45,24 @@ def about(request):
     editor_list = Editor.objects.all().__str__()
     context_dict['editors'] = editor_list
     return render(request, 'inventory_database/about.html', context=context_dict)
+	
+def browse_employees(request):
+
+	employees = Employee.objects.all()
+	context_dict = {}
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	context_dict['employees'] = employees
+	return render(request, 'inventory_database/browse_employees.html', context=context_dict)
+	
+def browse_labs_classrooms(request):
+
+	labs_classrooms = Lab_Classroom.objects.all()
+	context_dict = {}
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	context_dict['labs_classrooms'] = labs_classrooms
+	return render(request, 'inventory_database/browse_labs_classrooms.html', context=context_dict)
 
 
 def show_asset(request, asset_name_slug):
@@ -137,6 +160,8 @@ def search(request):
 			searchRoom = form.cleaned_data['searchRoom']
 			searchDateBegin = form.cleaned_data['searchDatebegin']
 			searchDateEnd = form.cleaned_data['searchDateEnd']
+			searchWarrantyBegin = form.cleaned_data['searchWarrantybegin']
+			searchWarrantyEnd = form.cleaned_data['searchWarrantyEnd']
 			
 			inventory_fac = Fac.objects.all()
 			inventory_student = Student.objects.all()
@@ -174,6 +199,11 @@ def search(request):
 			elif searchBy == '7':
 				search_list1 = inventory_student.filter(date_assigned__range=(searchDateBegin, searchDateEnd))
 				search_list2 = inventory_fac.filter(date_assigned__range=(searchDateBegin, searchDateEnd))
+				context_dict['total'] = search_list1.count() + search_list2.count()
+				
+			elif searchBy == '8':
+				search_list1 = inventory_student.filter(war_exp__range=(searchWarrantyBegin, searchWarrantyEnd))
+				search_list2 = inventory_fac.filter(war_exp__range=(searchWarrantyBegin, searchWarrantyEnd))
 				context_dict['total'] = search_list1.count() + search_list2.count()
 				
 			context_dict['inventory_fac'] = search_list1
@@ -322,15 +352,20 @@ def add_lab_classroom(request):
 
 
     return render(request, 'inventory_database/add_lab_classroom.html', context_dict)
-	
+# RIGHT NOW DELETE IS SET TO CASCADE - need to change to set to null	
 def delete_asset(request, asset_name_slug):
 	context_dict = {}
 	if Fac.objects.filter(slug__icontains = asset_name_slug):
 		asset = Fac.objects.get(slug=asset_name_slug)
 		context_dict['asset'] = asset
 		asset.delete()
-	else:
+	elif Student.objects.filter(slug__icontains = asset_name_slug):
 		asset = Student.objects.get(slug=asset_name_slug)
+		context_dict['asset'] = asset
+		asset.delete()
+		
+	elif Employee.objects.filter(slug__icontains = asset_name_slug):
+		asset = Employee.objects.get(slug=asset_name_slug)
 		context_dict['asset'] = asset
 		asset.delete()
 

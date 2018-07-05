@@ -48,6 +48,7 @@ class Asset(models.Model):
 		(5 , 'Assignee - Faculty/Staff'),
 		(6 , 'Room - Lab/Classroom'),
 		(7 , 'Assignment date'),
+		(8 , 'Warranty Expiration date'),
     )
     name = models.CharField(max_length=128, unique=True)
     slug = models.SlugField()

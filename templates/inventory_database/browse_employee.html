@@ -15,7 +15,6 @@
 		<th><b>Serial Number</b></th>
 		<th onclick=sortTableMan() ><b>Date Assigned</b></th>
 		<th onclick=sortTableMod()><b>Warranty Expires</b></th>
-		<th><b>Assignee/Room</b></th>
     </tr>
 	{% if inventory_fac or inventory_student %}
 	{% for asset in inventory_fac %}
@@ -24,7 +23,6 @@
 		<td>{{ asset.serial }}</td>
 		<td>{{ asset.date_assigned|date:"M d Y"  }}</td>
 		<td>{{ asset.war_exp|date:"M d Y"  }}</td>
-		<td>{{ asset.assignee }}</td>
     </tr>
 		{% endfor %}
 	{% for asset in inventory_student %}
@@ -33,7 +31,6 @@
 		<td>{{ asset.serial }}</td>
 		<td>{{ asset.date_assigned|date:"M d Y"  }}</td>
 		<td>{{ asset.war_exp|date:"M d Y"  }}</td>
-		<td>{{ asset.room }}</td>
     </tr>
 		{% endfor %}
 		{% endif %}

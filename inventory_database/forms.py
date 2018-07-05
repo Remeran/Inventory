@@ -112,10 +112,15 @@ class SearchForm(forms.ModelForm):
 							 
 	searchDateEnd = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)), required=False,
 							 help_text="Date End: ")
+	searchWarrantybegin = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)), required=False,
+							 help_text="Date Starting: ")
+							 
+	searchWarrantyEnd = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)), required=False,
+							 help_text="Date End: ")
 	
 	class Meta:
 		model = Asset
-		fields = ('search_by','searchName', 'searchSerial', 'searchModel', 'searchManufacturer', 'searchAssignee', 'searchRoom', 'searchDatebegin', 'searchDateEnd',  )
+		fields = ('search_by','searchName', 'searchSerial', 'searchModel', 'searchManufacturer', 'searchAssignee', 'searchRoom', 'searchDatebegin', 'searchDateEnd', 'searchWarrantybegin', 'searchWarrantyEnd',  )
 
 class UpdateFacForm(forms.ModelForm):
 	serial = forms.CharField(max_length=128, help_text="Serial")
