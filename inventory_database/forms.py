@@ -27,8 +27,8 @@ class FacForm(forms.ModelForm):
 	serial = forms.CharField(max_length=128, help_text="Serial:")
 	manufacturer = forms.CharField(max_length=128, help_text="Manufacturer:")
 	model = forms.CharField(max_length=128, help_text="Model")
-	war_exp = forms.DateField(widget=forms.SelectDateWidget(), help_text="Warranty Expiration date:")
-	date_assigned = forms.DateField(widget=forms.SelectDateWidget(),help_text="Assignment date:")
+	war_exp = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)), help_text="Warranty Expiration date:")
+	date_assigned = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)),help_text="Assignment date:")
 
 	assignee = forms.ModelChoiceField(queryset=Employee.objects.all(), required=False, help_text="Assignee:")
 	
@@ -57,8 +57,8 @@ class StudentForm(forms.ModelForm):
 	serial = forms.CharField(max_length=128, help_text="Serial: ")
 	manufacturer = forms.CharField(max_length=128, help_text="Manufacturer: ")
 	model = forms.CharField(max_length=128, help_text="Model: ")
-	war_exp = forms.DateField(widget=forms.SelectDateWidget(), help_text="Warranty Expiration Date: ")
-	date_assigned = forms.DateField(widget=forms.SelectDateWidget(), help_text="Assignment Date")
+	war_exp = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)), help_text="Warranty Expiration Date: ")
+	date_assigned = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)), help_text="Assignment Date")
 	room = forms.ModelChoiceField(queryset=Lab_Classroom.objects.all(), help_text="Room: ")
 	
 	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
@@ -73,7 +73,7 @@ class SoftwareForm(forms.ModelForm):
 	name = forms.CharField(max_length=128,
 							help_text="Name: ")
 	developer = forms.CharField(max_length=128, help_text="Developer")
-	lic_exp = forms.DateField(widget=forms.SelectDateWidget(),help_text="License Expiration Date: ")
+	lic_exp = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)),help_text="License Expiration Date: ")
 	assigned_dept = forms.CharField(max_length=128, help_text="Department: ")
 	license_type = forms.CharField(max_length=128, help_text="Type: ")
 	license_used = forms.IntegerField(help_text="Used: ")
@@ -106,17 +106,23 @@ class SearchForm(forms.ModelForm):
 							 
 	searchRoom = forms.CharField(required=False, max_length=128,
 							 help_text="Search by Room:")
+							 
+	searchDatebegin = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)), required=False,
+							 help_text="Date Starting: ")
+							 
+	searchDateEnd = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)), required=False,
+							 help_text="Date End: ")
 	
 	class Meta:
 		model = Asset
-		fields = ('search_by','searchName', 'searchSerial', 'searchModel', 'searchManufacturer', 'searchAssignee', 'searchRoom', )
+		fields = ('search_by','searchName', 'searchSerial', 'searchModel', 'searchManufacturer', 'searchAssignee', 'searchRoom', 'searchDatebegin', 'searchDateEnd',  )
 
 class UpdateFacForm(forms.ModelForm):
 	serial = forms.CharField(max_length=128, help_text="Serial")
 	manufacturer = forms.CharField(max_length=128, help_text="Manufacturer")
 	model = forms.CharField(max_length=128, help_text="Model")
 	war_exp = forms.DateField(widget=forms.SelectDateWidget(), help_text="Warranty Expiration date")
-	date_assigned = forms.DateField(widget=forms.SelectDateWidget(),help_text="Assignment date:")
+	date_assigned = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)),help_text="Assignment date:")
 	assignee = forms.ModelChoiceField(queryset=Employee.objects.all(), required=False, help_text="Assignee")
 	# An inline class to provide additional information on the form.
 	class Meta:
@@ -128,8 +134,8 @@ class UpdateStudentForm(forms.ModelForm):
 	serial = forms.CharField(max_length=128, help_text="Please enter Asset's Serial")
 	manufacturer = forms.CharField(max_length=128, help_text="Please enter Asset's manufacturer")
 	model = forms.CharField(max_length=128, help_text="Please enter Asset's Model")
-	war_exp = forms.DateField(widget=forms.SelectDateWidget(), help_text="Please enter Warranty Expiration date")
-	date_assigned = forms.DateField(widget=forms.SelectDateWidget(),help_text="Assignment date:")
+	war_exp = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)), help_text="Please enter Warranty Expiration date")
+	date_assigned = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)),help_text="Assignment date:")
 	room = forms.ModelChoiceField(queryset=Lab_Classroom.objects.all(), help_text="Location")
 	# An inline class to provide additional information on the form.
 	class Meta:

@@ -45,8 +45,9 @@ class Asset(models.Model):
         (2 , 'Serial'),
         (3 , 'Model'),
         (4 , 'Manufacturer'),
-		(5 , 'Assignee'),
-		(6 , 'Room'),
+		(5 , 'Assignee - Faculty/Staff'),
+		(6 , 'Room - Lab/Classroom'),
+		(7 , 'Assignment date'),
     )
     name = models.CharField(max_length=128, unique=True)
     slug = models.SlugField()

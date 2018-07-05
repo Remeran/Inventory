@@ -135,6 +135,8 @@ def search(request):
 			searchManufacturer = form.cleaned_data['searchManufacturer']
 			searchAssignee = form.cleaned_data['searchAssignee']
 			searchRoom = form.cleaned_data['searchRoom']
+			searchDateBegin = form.cleaned_data['searchDatebegin']
+			searchDateEnd = form.cleaned_data['searchDateEnd']
 			
 			inventory_fac = Fac.objects.all()
 			inventory_student = Student.objects.all()
@@ -168,6 +170,11 @@ def search(request):
 				search_list1 = inventory_student.filter(room__room__icontains = searchRoom)
 				search_list2 = {}
 				context_dict['total'] = search_list1.count()
+			
+			elif searchBy == '7':
+				search_list1 = inventory_student.filter(date_assigned__range=(searchDateBegin, searchDateEnd))
+				search_list2 = inventory_fac.filter(date_assigned__range=(searchDateBegin, searchDateEnd))
+				context_dict['total'] = search_list1.count() + search_list2.count()
 				
 			context_dict['inventory_fac'] = search_list1
 			context_dict['inventory_student'] = search_list2
