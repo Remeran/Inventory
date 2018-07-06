@@ -149,16 +149,16 @@ class UpdateStudentForm(forms.ModelForm):
 		fields = ('assignee', 'room', 'war_exp', 'model', 'manufacturer', 'serial')
 		
 class EditorForm(RegistrationFormUniqueEmail):
-    is_editor = forms.BooleanField(initial=False, help_text="Check to add user to Editors")
+	is_editor = forms.BooleanField(initial=False, help_text="Check to add user to Editors")
 	
 class UpdateEmployeeForm(forms.ModelForm):
-    id = forms.IntegerField(validators=[MaxValueValidator(9999999)])
-    title = forms.CharField(max_length=128, help_text="Please enter Employee's title")   
-    department = forms.CharField(max_length=128, help_text="Please enter Employee's department")
-    office = forms.CharField(max_length=128, help_text="Please enter Employee's office number")
+	id = forms.IntegerField(validators=[MaxValueValidator(9999999)])
+	title = forms.CharField(max_length=128, help_text="Please enter Employee's title")   
+	department = forms.CharField(max_length=128, help_text="Please enter Employee's department")
+	office = forms.CharField(max_length=128, help_text="Please enter Employee's office number")
 	
 
-    class Meta:
+	class Meta:
 
 		model = Employee
 		fields = ('id', 'title', 'department', 'office',)

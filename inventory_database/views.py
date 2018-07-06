@@ -14,37 +14,38 @@ from inventory_database.forms import FacForm, EmployeeForm, Lab_ClassroomForm, S
 
 def index(request):
     
-    inventory_count = Fac.objects.count() + Student.objects.count()
-    employee_count = Employee.objects.count()
-    fac_count = Fac.objects.count()
-    student_count = Student.objects.count()
-    lab_classroom_count = Lab_Classroom.objects.count()
-    software_count = Software.objects.count()
-    editor_list = Editor.objects.all().__str__()
-    context_dict = {}
-    context_dict['inv_count'] = inventory_count
-    context_dict['emp_count'] = employee_count
-    context_dict['fac_count'] = fac_count
-    context_dict['student_count'] = student_count
-    context_dict['lab_classroom_count'] = lab_classroom_count
-    context_dict['software_count'] = software_count
-    editor_list = Editor.objects.all().__str__()
-    context_dict['editors'] = editor_list
+	inventory_count = Fac.objects.count() + Student.objects.count()
+	employee_count = Employee.objects.count()
+	fac_count = Fac.objects.count()
+	student_count = Student.objects.count()
+	lab_classroom_count = Lab_Classroom.objects.count()
+	software_count = Software.objects.count()
+	editor_list = Editor.objects.all().__str__()
+	context_dict = {}
+	context_dict['inv_count'] = inventory_count
+	context_dict['emp_count'] = employee_count
+	context_dict['fac_count'] = fac_count
+	context_dict['student_count'] = student_count
+	context_dict['lab_classroom_count'] = lab_classroom_count
+	context_dict['software_count'] = software_count
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
 
-    # Return a rendered response to send to the client.
-    return render(request, 'inventory_database/index.html', context=context_dict)
+	# Return a rendered response to send to the client.
+	return render(request, 'inventory_database/index.html', context=context_dict)
 
 def about(request):
 
-    inventory_fac = Fac.objects.all()
-    inventory_student = Student.objects.all()
-    context_dict = {}
-    context_dict['total'] = Fac.objects.count() + Student.objects.count()
-    context_dict['inventory_fac'] = inventory_fac
-    context_dict['inventory_student'] = inventory_student
-    editor_list = Editor.objects.all().__str__()
-    context_dict['editors'] = editor_list
-    return render(request, 'inventory_database/about.html', context=context_dict)
+	inventory_fac = Fac.objects.all()
+	inventory_student = Student.objects.all()
+	context_dict = {}
+	context_dict['total'] = Fac.objects.count() + Student.objects.count()
+	context_dict['inventory_fac'] = inventory_fac
+	context_dict['inventory_student'] = inventory_student
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	
+	return render(request, 'inventory_database/about.html', context=context_dict)
 	
 def browse_employees(request):
 
@@ -53,6 +54,7 @@ def browse_employees(request):
 	editor_list = Editor.objects.all().__str__()
 	context_dict['editors'] = editor_list
 	context_dict['employees'] = employees
+	
 	return render(request, 'inventory_database/browse_employees.html', context=context_dict)
 	
 def browse_labs_classrooms(request):
@@ -75,76 +77,74 @@ def browse_software(request):
 
 
 def show_asset(request, asset_name_slug):
-    context_dict = {}
+	context_dict = {}
 	#Check to see if Faculty or Student computer was sent to view
-    if Fac.objects.filter(slug__icontains = asset_name_slug):
+	if Fac.objects.filter(slug__icontains = asset_name_slug):
 		# If so asset is a faculty computer 
-        asset = Fac.objects.get(slug=asset_name_slug)
-        is_fac = True
-        if asset.assignee:
-            employee = Employee.objects.get(id = asset.assignee.id)
-            context_dict['employee'] = employee
-        context_dict['is_fac'] = is_fac
-        form = UpdateFacForm(instance=asset)
+		asset = Fac.objects.get(slug=asset_name_slug)
+		is_fac = True
+		if asset.assignee:
+			employee = Employee.objects.get(id = asset.assignee.id)
+			context_dict['employee'] = employee
+		context_dict['is_fac'] = is_fac
+		form = UpdateFacForm(instance=asset)
 
-        if request.method == 'POST':
-		form = UpdateFacForm(request.POST, instance = asset)
-		context_dict['form'] = form
-		context_dict['Asset'] = asset
+		if request.method == 'POST':
+			form = UpdateFacForm(request.POST, instance = asset)
+			context_dict['form'] = form
+			context_dict['Asset'] = asset
 
-		if form.is_valid():
-			form.save()
-			return render(request, 'inventory_database/asset.html', context_dict)
-		else:
-			print(form.errors)	
+			if form.is_valid():
+				form.save()
+				return render(request, 'inventory_database/asset.html', context_dict)
+			else:
+				print(form.errors)	
 		
-    else:
-	    #Else it is a student computer
-        asset = Student.objects.get(slug=asset_name_slug)
-        is_fac = False
-        room = Lab_Classroom.objects.get(room = asset.room.room)
-        context_dict['room'] = room
-        context_dict['is_fac'] = is_fac
-        form = UpdateStudentForm(instance=asset)
+	else:
+		#Else it is a student computer
+		asset = Student.objects.get(slug=asset_name_slug)
+		is_fac = False
+		room = Lab_Classroom.objects.get(room = asset.room.room)
+		context_dict['room'] = room
+		context_dict['is_fac'] = is_fac
+		form = UpdateStudentForm(instance=asset)
 
-        if request.method == 'POST':
-		form = UpdateStudentForm(request.POST, instance = asset)
-		context_dict['form'] = form
-		context_dict['Asset'] = asset
+		if request.method == 'POST':
+			form = UpdateStudentForm(request.POST, instance = asset)
+			context_dict['form'] = form
+			context_dict['Asset'] = asset
 
-		if form.is_valid():
-			form.save(commit=True)
-			return render(request, 'inventory_database/asset.html', context_dict)
-		else:
-			print(form.errors)	
+			if form.is_valid():
+				form.save(commit=True)
+				return render(request, 'inventory_database/asset.html', context_dict)
+			else:
+				print(form.errors)	
 	
-    editor_list = Editor.objects.all().__str__()
-    context_dict['editors'] = editor_list
-    context_dict['Asset'] = asset
-    context_dict['form'] = form
-    return render(request, 'inventory_database/asset.html', context_dict)
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	context_dict['Asset'] = asset
+	context_dict['form'] = form
+	return render(request, 'inventory_database/asset.html', context_dict)
 	
 
 
 def add_asset(request):
-    form = FacForm()
-    context_dict = {}
-    editor_list = Editor.objects.all().__str__()
-    context_dict['editors'] = editor_list
-    context_dict['form'] = form
+	form = FacForm()
+	context_dict = {}
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	context_dict['form'] = form
 
-    if request.method == 'POST':
-        form = FacForm(request.POST)
-        if form.is_valid():
-		
-            form.save(commit=True)
-            return index(request)
-        else:
-
-            print(form.errors)
+	if request.method == 'POST':
+		form = FacForm(request.POST)
+		if form.is_valid():
+			form.save(commit=True)
+			return index(request)
+		else:
+			print(form.errors)
 
 
-    return render(request, 'inventory_database/add_asset.html', context_dict)
+	return render(request, 'inventory_database/add_asset.html', context_dict)
 	
 def search(request):
 	form = SearchForm()
@@ -225,26 +225,26 @@ def search(request):
 	
 def student_lab(request):
 
-    inventory_student = Student.objects.all()
-    context_dict = {}
-    editor_list = Editor.objects.all().__str__()
-    context_dict['editors'] = editor_list
-    context_dict['total'] = Student.objects.count()
-    context_dict['inventory_student'] = inventory_student
-    return render(request, 'inventory_database/about.html', context=context_dict)
+	inventory_student = Student.objects.all()
+	context_dict = {}
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	context_dict['total'] = Student.objects.count()
+	context_dict['inventory_student'] = inventory_student
+	return render(request, 'inventory_database/about.html', context=context_dict)
 	
 def faculty_staff(request):
 
-    inventory_fac = Fac.objects.all()
-    context_dict = {}
-    editor_list = Editor.objects.all().__str__()
-    context_dict['editors'] = editor_list
-    context_dict['total'] = Fac.objects.count()
-    context_dict['inventory_fac'] = inventory_fac
-    return render(request, 'inventory_database/about.html', context=context_dict)
+	inventory_fac = Fac.objects.all()
+	context_dict = {}
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	context_dict['total'] = Fac.objects.count()
+	context_dict['inventory_fac'] = inventory_fac
+	return render(request, 'inventory_database/about.html', context=context_dict)
 	
 class UserProfileRegistration(RegistrationView):
-    form_class = EditorForm
+	form_class = EditorForm
 	
 def show_employee(request, employee_id_slug):
 	context_dict = {}
@@ -301,84 +301,74 @@ def show_software(request, software_slug):
 	return render(request, 'inventory_database/software.html', context_dict)
 	
 def add_employee(request):
-    form = EmployeeForm()
-    context_dict = {}
-    editor_list = Editor.objects.all().__str__()
-    context_dict['editors'] = editor_list
-    context_dict['form'] = form
+	form = EmployeeForm()
+	context_dict = {}
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	context_dict['form'] = form
 
-    if request.method == 'POST':
-        form = EmployeeForm(request.POST)
-        if form.is_valid():
-		
-            form.save(commit=True)
-            return index(request)
-        else:
+	if request.method == 'POST':
+		form = EmployeeForm(request.POST)
+		if form.is_valid():
+			form.save(commit=True)
+			return index(request)
+		else:
+			print(form.errors)
 
-            print(form.errors)
-
-
-    return render(request, 'inventory_database/add_employee.html', context_dict)
+	return render(request, 'inventory_database/add_employee.html', context_dict)
 	
 def add_student(request):
-    form = StudentForm()
-    context_dict = {}
-    editor_list = Editor.objects.all().__str__()
-    context_dict['editors'] = editor_list
-    context_dict['form'] = form
+	form = StudentForm()
+	context_dict = {}
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	context_dict['form'] = form
 
-    if request.method == 'POST':
-        form = StudentForm(request.POST)
-        if form.is_valid():
-		
-            form.save(commit=True)
-            return index(request)
-        else:
-
-            print(form.errors)
+	if request.method == 'POST':
+		form = StudentForm(request.POST)
+		if form.is_valid():
+			form.save(commit=True)
+			return index(request)
+		else:
+			print(form.errors)
 
 
-    return render(request, 'inventory_database/add_student.html', context_dict)
+	return render(request, 'inventory_database/add_student.html', context_dict)
 	
 def add_software(request):
-    form = SoftwareForm()
-    context_dict = {}
-    editor_list = Editor.objects.all().__str__()
-    context_dict['editors'] = editor_list
-    context_dict['form'] = form
+	form = SoftwareForm()
+	context_dict = {}
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	context_dict['form'] = form
 
-    if request.method == 'POST':
-        form = SoftwareForm(request.POST)
-        if form.is_valid():
-		
-            form.save(commit=True)
-            return index(request)
-        else:
-
-            print(form.errors)
+	if request.method == 'POST':
+		form = SoftwareForm(request.POST)
+		if form.is_valid():
+			form.save(commit=True)
+			return index(request)
+		else:
+			print(form.errors)
 
 
-    return render(request, 'inventory_database/add_software.html', context_dict)
+	return render(request, 'inventory_database/add_software.html', context_dict)
 	
 def add_lab_classroom(request):
-    form = Lab_ClassroomForm()
-    context_dict = {}
-    editor_list = Editor.objects.all().__str__()
-    context_dict['editors'] = editor_list
-    context_dict['form'] = form
+	form = Lab_ClassroomForm()
+	context_dict = {}
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	context_dict['form'] = form
 
-    if request.method == 'POST':
-        form = Lab_ClassroomForm(request.POST)
-        if form.is_valid():
-		
-            form.save(commit=True)
-            return index(request)
-        else:
-
-            print(form.errors)
-
-
-    return render(request, 'inventory_database/add_lab_classroom.html', context_dict)
+	if request.method == 'POST':
+		form = Lab_ClassroomForm(request.POST)
+		if form.is_valid():
+			form.save(commit=True)
+			return index(request)
+		else:
+			print(form.errors)
+	return render(request, 'inventory_database/add_lab_classroom.html', context_dict)
+	
 # RIGHT NOW DELETE IS SET TO CASCADE - need to change to set to null	
 def delete_asset(request, asset_name_slug):
 	context_dict = {}
@@ -396,5 +386,4 @@ def delete_asset(request, asset_name_slug):
 		context_dict['asset'] = asset
 		asset.delete()
 
-	return render(request, 'inventory_database/delete_asset.html', context_dict)
-	
+	return render(request, 'inventory_database/delete_asset.html', context_dict)	
