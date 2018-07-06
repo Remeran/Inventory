@@ -37,16 +37,22 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
 	{% if user.is_authenticated %}
     <a href="/inventory_database/" {% if request.path == "/inventory_database/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-users fa-fw"></i>Home</a>
-    <a href="/inventory_database/about/" {% if request.path == "/inventory_database/about/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-eye fa-fw"></i>Browse</a>
+	<button onclick="accordion('browse-options')" class="w3-bar-item w3-button w3-padding "><i class="fa fa-eye fa-fw"></i>Browse </button>
+	<div id="browse-options" class="w3-container w3-hide">
+		<a href="/inventory_database/about/" {% if request.path == "/inventory_database/about/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-desktop fa-fw"></i> Browse Computers</a>
+		<a href="/inventory_database/browse_employees/" {% if request.path == "/inventory_database/browse_employees/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-address-card fa-fw"></i> Browse Employees</a>
+		<a href="/inventory_database/browse_labs_classrooms/" {% if request.path == "/inventory_database/browse_labs_classrooms/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-building fa-fw"></i> Browse Labs/Classrooms</a>
+		<a href="/inventory_database/browse_software/" {% if request.path == "/inventory_database/browse_software/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-folder fa-fw"></i> Browse Software</a>
+	</div>
     <a href="/inventory_database/search/" {% if request.path == "/inventory_database/search/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-search fa-fw"></i>Search</a>
 	{% if user.get_username in editors %}
 	<button onclick="accordion('add-options')" class="w3-bar-item w3-button w3-padding "><i class="fa fa-plus fa-fw"></i>Add </button>
 	<div id="add-options" class="w3-container w3-hide">
-	<a href="/inventory_database/add_asset/" {% if request.path == "/inventory_database/add_asset/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-desktop fa-fw"></i> Faculty/Staff Computer</a>
-	<a href="/inventory_database/add_student/" {% if request.path == "/inventory_database/add_student/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-desktop fa-fw"></i> Lab/Classroom Computer</a>
-	<a href="/inventory_database/add_employee/" {% if request.path == "/inventory_database/add_employee/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-address-card fa-fw"></i> Employee</a>
-	<a href="{% url 'add_lab_classroom' %}" {% if request.path == "/inventory_database/add_lab_classroom/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-building fa-fw"></i> Lab/Classroom</a>
-	<a href="/inventory_database/add_software/" {% if request.path == "/inventory_database/add_software/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-folder fa-fw"></i> Software</a>
+		<a href="/inventory_database/add_asset/" {% if request.path == "/inventory_database/add_asset/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-desktop fa-fw"></i> Faculty/Staff Computer</a>
+		<a href="/inventory_database/add_student/" {% if request.path == "/inventory_database/add_student/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-desktop fa-fw"></i> Lab/Classroom Computer</a>
+		<a href="/inventory_database/add_employee/" {% if request.path == "/inventory_database/add_employee/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-address-card fa-fw"></i> Employee</a>
+		<a href="{% url 'add_lab_classroom' %}" {% if request.path == "/inventory_database/add_lab_classroom/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-building fa-fw"></i> Lab/Classroom</a>
+		<a href="/inventory_database/add_software/" {% if request.path == "/inventory_database/add_software/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-folder fa-fw"></i> Software</a>
 	</div>
 	<a href="/accounts/register/" {% if request.path == "/accounts/register" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-edit fa-fw"></i>Add User</a>
 	{% endif %}

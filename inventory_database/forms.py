@@ -170,3 +170,16 @@ class UpdateLab_ClassroomForm(forms.ModelForm):
 	class Meta:
 		model = Lab_Classroom
 		fields = ('building', 'dept',)
+		
+class UpdateSoftwareForm(forms.ModelForm):
+	developer = forms.CharField(max_length=128, help_text="Developer")
+	lic_exp = forms.DateField(widget=forms.SelectDateWidget(years=range(2000, 2050)),help_text="License Expiration Date: ")
+	assigned_dept = forms.CharField(max_length=128, help_text="Department: ")
+	license_type = forms.CharField(max_length=128, help_text="Type: ")
+
+
+	# An inline class to provide additional information on the form.
+	class Meta:
+		# Provide an association between the ModelForm and a model
+		model = Software
+		fields = ('developer', 'lic_exp', 'assigned_dept', 'license_type',)

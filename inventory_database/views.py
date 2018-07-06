@@ -10,7 +10,7 @@ from inventory_database.models import Hardware
 from inventory_database.models import Editor
 from inventory_database.models import Lab_Classroom
 from inventory_database.models import Software
-from inventory_database.forms import FacForm, EmployeeForm, Lab_ClassroomForm, StudentForm, SoftwareForm, SearchForm, UpdateFacForm, UpdateStudentForm, EditorForm, UpdateEmployeeForm, UpdateLab_ClassroomForm
+from inventory_database.forms import FacForm, EmployeeForm, Lab_ClassroomForm, StudentForm, SoftwareForm, SearchForm, UpdateFacForm, UpdateStudentForm, EditorForm, UpdateEmployeeForm, UpdateLab_ClassroomForm, UpdateSoftwareForm
 
 def index(request):
     
@@ -63,6 +63,15 @@ def browse_labs_classrooms(request):
 	context_dict['editors'] = editor_list
 	context_dict['labs_classrooms'] = labs_classrooms
 	return render(request, 'inventory_database/browse_labs_classrooms.html', context=context_dict)
+	
+def browse_software(request):
+
+	software = Software.objects.all()
+	context_dict = {}
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	context_dict['software'] = software
+	return render(request, 'inventory_database/browse_software.html', context=context_dict)
 
 
 def show_asset(request, asset_name_slug):
@@ -272,6 +281,24 @@ def show_room(request, room_name_slug):
 			return render(request, 'inventory_database/room.html', context_dict)
 	context_dict['form'] = form
 	return render(request, 'inventory_database/room.html', context_dict)
+	
+def show_software(request, software_slug):
+	context_dict = {}
+	software = Software.objects.get(slug = software_slug)
+	editor_list = Editor.objects.all().__str__()
+	form = UpdateSoftwareForm(instance=software)
+	context_dict['software'] = software
+	context_dict['editors'] = editor_list
+	
+	if request.method == 'POST':
+		form = UpdateSoftwareForm(request.POST, instance=software)
+		context_dict['form'] = form
+		
+		if form.is_valid():
+			form.save(commit=True)
+			return render(request, 'inventory_database/software.html', context_dict)
+	context_dict['form'] = form
+	return render(request, 'inventory_database/software.html', context_dict)
 	
 def add_employee(request):
     form = EmployeeForm()
