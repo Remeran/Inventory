@@ -111,11 +111,13 @@ def show_asset(request, asset_name_slug):
 
 		if request.method == 'POST':
 			form = UpdateStudentForm(request.POST, instance = asset)
+			asset.dec()
 			context_dict['form'] = form
 			context_dict['Asset'] = asset
 
 			if form.is_valid():
-				form.save(commit=True)
+				computer = form.save(commit=True)
+				computer.inc()
 				return render(request, 'inventory_database/asset.html', context_dict)
 			else:
 				print(form.errors)	
@@ -327,7 +329,9 @@ def add_student(request):
 	if request.method == 'POST':
 		form = StudentForm(request.POST)
 		if form.is_valid():
-			form.save(commit=True)
+			computer = form.save(commit=False)
+			computer.inc()
+			computer.save()
 			return index(request)
 		else:
 			print(form.errors)
@@ -379,6 +383,7 @@ def delete_asset(request, asset_name_slug):
 	elif Student.objects.filter(slug__icontains = asset_name_slug):
 		asset = Student.objects.get(slug=asset_name_slug)
 		context_dict['asset'] = asset
+		asset.dec()
 		asset.delete()
 		
 	elif Employee.objects.filter(slug__icontains = asset_name_slug):

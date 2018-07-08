@@ -75,16 +75,24 @@ class Hardware(Asset):
 		abstract = True
 # Fac is a class that inherits from	Hardware and Assets	
 class Fac(Hardware):
-	assignee = models.ForeignKey(Employee, blank=True, null=True)
+	assignee = models.ForeignKey(Employee, blank=True, null=True, on_delete = models.SET_NULL)
 	
 	class Meta:
 		verbose_name_plural = 'Faculty/Staff Computers'
 
 class Student(Hardware):
-	room = models.ForeignKey(Lab_Classroom)
+	room = models.ForeignKey(Lab_Classroom, null=True, on_delete = models.SET_NULL)
 	
 	class Meta:
-		verbose_name_plural = 'Student Computers'	
+		verbose_name_plural = 'Student Computers'
+
+	def inc(self):
+		self.room.comp_count += 1
+		self.room.save()
+		
+	def dec(self):
+		self.room.comp_count -= 1
+		self.room.save()
 
 # Software is a class that inherits from Assets			
 class Software(Asset):
@@ -102,6 +110,14 @@ class Editor(models.Model):
 	is_editor = models.BooleanField(default=False)
 	
 	def __str__(self): 
-		return self.user.username		
+		return self.user.username	
+# This won't work! since Hardware is abstract -- MUST LOOK INTO IT.
+#class assigned_software(models.Model):
+#	Computer = models.ForeignKey(Hardware)
+#	Software = models.ForeignKey(Software)
+#	
+#	class Meta:
+#		verbose_name_plural = 'Assigned Software'	
+		
 
 

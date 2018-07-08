@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'inventory_database',
 	'widget_tweaks',
-    'registration'
+    'registration',
 ]
 
 MIDDLEWARE_CLASSES = [
