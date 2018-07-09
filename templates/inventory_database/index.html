@@ -11,66 +11,66 @@
   </header>
 
   <div class="w3-row-padding w3-margin-bottom">
-    <div class="w3-quarter">
+    <a href="{% url 'about' %}"><div class="w3-quarter">
       <div class="w3-container w3-red w3-padding-16">
-        <div class="w3-left"><a href="{% url 'about' %}"><i class="fa fa-desktop w3-xxxlarge"></i></a></div>
+        <div class="w3-left"><i class="fa fa-desktop w3-xxxlarge"></i></div>
         <div class="w3-right">
           <h3>{{ inv_count }}</h3> 
         </div>
         <div class="w3-clear"></div>
         <h4>Total Inventory</h4>
       </div>
-    </div>
-    <div class="w3-quarter">
+    </div></a>
+    <a href="{% url 'browse_employees' %}"><div class="w3-quarter">
       <div class="w3-container w3-blue w3-padding-16">
-        <div class="w3-left"><a href="{% url 'browse_employees' %}"><i class="fa fa-users w3-xxxlarge"></i></a></div>
+        <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
         <div class="w3-right">
           <h3>{{ emp_count }}</h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Employees</h4>
       </div>
-    </div>
-    <div class="w3-quarter">
+    </div></a>
+    <a href="{% url 'faculty_staff' %}"><div class="w3-quarter">
       <div class="w3-container w3-teal w3-padding-16">
-        <div class="w3-left"><a href="{% url 'faculty_staff' %}"><i class="fa fa-desktop w3-xxxlarge"></i></a></div>
+        <div class="w3-left"><i class="fa fa-desktop w3-xxxlarge"></i></div>
         <div class="w3-right">
           <h3>{{ fac_count }}</h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Faculty/Staff Computers</h4>
       </div>
-    </div>
-    <div class="w3-quarter">
+    </div></a>
+    <a href="{% url 'student_lab' %}"><div class="w3-quarter">
       <div class="w3-container w3-orange w3-text-white w3-padding-16">
-        <div class="w3-left"><a href="{% url 'student_lab' %}"><i class="fa fa-desktop w3-xxxlarge"></i></a></div>
+        <div class="w3-left"><i class="fa fa-desktop w3-xxxlarge"></i></div>
         <div class="w3-right">
           <h3>{{ student_count }}</h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Student/Lab Computers</h4>
       </div>
-    </div>
-    <div class="w3-quarter">
+    </div></a>
+    <a href="{% url 'browse_labs_classrooms' %}"><div class="w3-quarter">
       <div class="w3-container w3-indigo w3-text-white w3-padding-16">
-        <div class="w3-left"><a href="{% url 'browse_labs_classrooms' %}"><i class="fa fa-building w3-xxxlarge"></i></a></div>
+        <div class="w3-left"><i class="fa fa-building w3-xxxlarge"></i></div>
         <div class="w3-right">
           <h3>{{ lab_classroom_count }}</h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Labs/Classrooms</h4>
       </div>
-    </div>
-    <div class="w3-quarter">
+    </div></a>
+    <a href="{% url 'browse_software' %}"><div class="w3-quarter">
       <div class="w3-container w3-amber w3-text-white w3-padding-16">
-        <div class="w3-left"><a href="{% url 'browse_software' %}"><i class="fa fa-folder w3-xxxlarge"></i></a></div>
+        <div class="w3-left"><i class="fa fa-folder w3-xxxlarge"></i></div>
         <div class="w3-right">
           <h3>{{ software_count }}</h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Software</h4>
       </div>
-    </div>
+    </div></a>
   </div>
 
 
