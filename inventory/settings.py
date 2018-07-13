@@ -24,6 +24,7 @@ LOGIN_REDIRECT_URL = '/'
 # and are trying to access pages requiring authentication
 LOGIN_URL = '/accounts/login/'
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # build template directory
