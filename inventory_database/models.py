@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 from django.core.validators import MaxValueValidator
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from datetime import datetime
 
@@ -112,12 +114,25 @@ class Editor(models.Model):
 	def __str__(self): 
 		return self.user.username	
 # This won't work! since Hardware is abstract -- MUST LOOK INTO IT.
-#class assigned_software(models.Model):
-#	Computer = models.ForeignKey(Hardware)
-#	Software = models.ForeignKey(Software)
-#	
-#	class Meta:
-#		verbose_name_plural = 'Assigned Software'	
+		
+class Assign_Software(models.Model):
+	ADDTO_CHOICES = (
+		(1 , 'Faculty/Staff Computer'),
+		(2 , 'Lab/Classroom Computer'),
+	)
+	faculty_computer = models.ForeignKey(Fac, blank=True, null=True)
+	student_computer = models.ForeignKey(Student, blank=True, null=True)
+	software = models.ForeignKey(Software)
+	class Meta:
+		verbose_name_plural = 'Assigned Software'
+		
+	def inc(self):
+		self.software.license_used += 1
+		self.software.save()
+		
+	def dec(self):
+		self.software.license_used -= 1
+		self.software.save()
 		
 
 

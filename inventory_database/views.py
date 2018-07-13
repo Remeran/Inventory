@@ -10,7 +10,11 @@ from inventory_database.models import Hardware
 from inventory_database.models import Editor
 from inventory_database.models import Lab_Classroom
 from inventory_database.models import Software
-from inventory_database.forms import FacForm, EmployeeForm, Lab_ClassroomForm, StudentForm, SoftwareForm, SearchForm, UpdateFacForm, UpdateStudentForm, EditorForm, UpdateEmployeeForm, UpdateLab_ClassroomForm, UpdateSoftwareForm
+from inventory_database.models import Assign_Software
+from inventory_database.forms import FacForm, EmployeeForm, Lab_ClassroomForm, StudentForm, SoftwareForm, SearchForm, UpdateFacForm, UpdateStudentForm, EditorForm, UpdateEmployeeForm, UpdateLab_ClassroomForm, UpdateSoftwareForm, Assigned_SoftwareForm
+
+class UserProfileRegistration(RegistrationView):
+	form_class = EditorForm
 
 def index(request):
     
@@ -88,6 +92,10 @@ def show_asset(request, asset_name_slug):
 			context_dict['employee'] = employee
 		context_dict['is_fac'] = is_fac
 		form = UpdateFacForm(instance=asset)
+		
+		if Assign_Software.objects.filter(faculty_computer__slug = asset_name_slug):
+			software = Assign_Software.objects.filter(faculty_computer = asset)
+			context_dict['software'] = software
 
 		if request.method == 'POST':
 			form = UpdateFacForm(request.POST, instance = asset)
@@ -108,6 +116,10 @@ def show_asset(request, asset_name_slug):
 		context_dict['room'] = room
 		context_dict['is_fac'] = is_fac
 		form = UpdateStudentForm(instance=asset)
+		
+		if Assign_Software.objects.filter(student_computer__slug = asset_name_slug):
+			software = Assign_Software.objects.filter(student_computer = asset)
+			context_dict['software'] = software
 
 		if request.method == 'POST':
 			form = UpdateStudentForm(request.POST, instance = asset)
@@ -244,9 +256,8 @@ def faculty_staff(request):
 	context_dict['total'] = Fac.objects.count()
 	context_dict['inventory_fac'] = inventory_fac
 	return render(request, 'inventory_database/about.html', context=context_dict)
-	
-class UserProfileRegistration(RegistrationView):
-	form_class = EditorForm
+
+
 	
 def show_employee(request, employee_id_slug):
 	context_dict = {}
@@ -287,9 +298,12 @@ def show_room(request, room_name_slug):
 def show_software(request, software_slug):
 	context_dict = {}
 	software = Software.objects.get(slug = software_slug)
+	software_list = Assign_Software.objects.filter(software = software)
+	print(software_list)
 	editor_list = Editor.objects.all().__str__()
 	form = UpdateSoftwareForm(instance=software)
 	context_dict['software'] = software
+	context_dict['software_list'] = software_list
 	context_dict['editors'] = editor_list
 	
 	if request.method == 'POST':
@@ -373,7 +387,7 @@ def add_lab_classroom(request):
 			print(form.errors)
 	return render(request, 'inventory_database/add_lab_classroom.html', context_dict)
 	
-# RIGHT NOW DELETE IS SET TO CASCADE - need to change to set to null	
+
 def delete_asset(request, asset_name_slug):
 	context_dict = {}
 	if Fac.objects.filter(slug__icontains = asset_name_slug):
@@ -392,3 +406,31 @@ def delete_asset(request, asset_name_slug):
 		asset.delete()
 
 	return render(request, 'inventory_database/delete_asset.html', context_dict)	
+	
+def delete_software(request, id):
+	context_dict = {}
+	if Assign_Software.objects.filter(id__icontains = id):
+		software = Assign_Software.objects.get(id=id)
+		context_dict['software'] = software
+		software.dec()
+		software.delete()
+
+	return render(request, 'inventory_database/delete_asset.html', context_dict)	
+	
+def assign_software(request):
+	form = Assigned_SoftwareForm()
+	context_dict = {}
+	editor_list = Editor.objects.all().__str__()
+	context_dict['editors'] = editor_list
+	context_dict['form'] = form
+
+	if request.method == 'POST':
+		form = Assigned_SoftwareForm(request.POST)
+		if form.is_valid():
+			software = form.save(commit=False)
+			software.inc()
+			software.save()
+			return index(request)
+		else:
+			print(form.errors)
+	return render(request, 'inventory_database/assign_software.html', context_dict)

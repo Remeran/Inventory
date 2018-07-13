@@ -1,5 +1,8 @@
 from django.conf.urls import url
 from inventory_database import views
+from django.conf import settings
+from django.conf.urls.static import static
+from django.conf.urls import include
 
 
 urlpatterns = [
@@ -14,7 +17,9 @@ urlpatterns = [
 	url(r'^add_student/$', views.add_student, name='add_student'),
 	url(r'^add_software/$', views.add_software, name='add_software'),
 	url(r'^add_lab_classroom/$', views.add_lab_classroom, name='add_lab_classroom'),
+	url(r'^assign_software/$', views.assign_software, name='assign_software'),
 	url(r'^asset/(?P<asset_name_slug>[\w\-]+)/$', views.show_asset, name='show_asset'),
+	url(r'^asset/software/(?P<id>[\w\-]+)/$', views.delete_software, name='delete_software'),
 	url(r'^employee/(?P<employee_id_slug>[\w\-]+)/$', views.show_employee, name='show_employee'),
 	url(r'^room/(?P<room_name_slug>[\w\-]+)/$', views.show_room, name='show_room'),
 	url(r'^software/(?P<software_slug>[\w\-]+)/$', views.show_software, name='show_software'),

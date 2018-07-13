@@ -1,5 +1,5 @@
 from django.contrib import admin
-from inventory_database.models import Employee, Fac, Student, Lab_Classroom, Software, Editor
+from inventory_database.models import Employee, Fac, Student, Lab_Classroom, Software, Editor, Assign_Software
 
 # Register any models here.
 
@@ -26,5 +26,6 @@ admin.site.register(Student, StudentAdmin)
 admin.site.register(Lab_Classroom)
 admin.site.register(Software, SoftwareAdmin)
 admin.site.register(Editor)
+admin.site.register(Assign_Software)
 
 

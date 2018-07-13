@@ -4,6 +4,11 @@
 {% block content %}
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
   <!-- Header -->
+<div class="w3-bar w3-black">
+  <button class="w3-bar-item w3-button" onclick="openTab('Info')">Info</button>
+  <button class="w3-bar-item w3-button" onclick="openTab('Software')">Software</button>
+</div> 
+<div id="Info" class="tab w3-animate-right">	
 	<header class="w3-container" style="padding-top:22px">
 		<h5><b><i class="fa fa-desktop"></i> {{ Asset.name }} </b> <a id="delete" onclick="confirmDel()" href=# />Delete</a></h5>
 	</header>
@@ -91,9 +96,44 @@
 				link.href="{% url 'delete_asset' Asset.slug %}"
 			}
 		}
+		function openTab(tabName) {
+			var i;
+			var x = document.getElementsByClassName("tab");
+			for (i = 0; i < x.length; i++) {
+				x[i].style.display = "none"; 
+			}
+			document.getElementById(tabName).style.display = "block"; 
+		}
 		</script>
 	{% else %}
 		The specified asset doesn't exist!
+	{% endif %}
+<div id="Software" class="tab w3-animate-right" style="display:none">	
+	<header class="w3-container" style="padding-top:22px">
+		<h5><b><i class="fa fa-share-square-o"></i> {{ Asset.name }} </b></h5>
+	</header>
+	{% if software %}
+		<table class="w3-table w3-striped w3-white w3-hoverable">
+		<tr>
+		<th><b>Software</b></th>
+		</tr>
+		{% if user.get_username not in editors %}
+		{% for software in software %}
+		<tr>
+		<td>{{ software.software }}</td>
+		</tr>
+		{% endfor %}
+		{% else %}
+		{% for software in software %}
+		<tr>
+		<td>{{ software.software }} <a id="delete" href="{% url 'delete_software' software.id %}" /> Remove</a></td>
+		</tr>
+		{% endfor %}
+		</table>
+</div>
+		{% endif %}
+	{% else %}
+		This asset has no assigned software!
 	{% endif %}
 </div>
 {% endblock %}

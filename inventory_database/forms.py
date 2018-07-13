@@ -1,7 +1,7 @@
 from django import forms
 from registration.forms import RegistrationFormUniqueEmail
 from django.core.validators import MaxValueValidator
-from inventory_database.models import Employee, Fac, Lab_Classroom, Asset, Hardware, Student, Software
+from inventory_database.models import Employee, Fac, Lab_Classroom, Asset, Hardware, Student, Software, Assign_Software
 
 
 
@@ -183,3 +183,13 @@ class UpdateSoftwareForm(forms.ModelForm):
 		# Provide an association between the ModelForm and a model
 		model = Software
 		fields = ('developer', 'lic_exp', 'assigned_dept', 'license_type',)
+		
+class Assigned_SoftwareForm(forms.ModelForm):
+	add_to = forms.ChoiceField(choices=Assign_Software.ADDTO_CHOICES, help_text="What Type of Computer: ")
+	faculty_computer = forms.ModelChoiceField(queryset=Fac.objects.all(), required=False, help_text="Computer: ")
+	student_computer = forms.ModelChoiceField(queryset=Student.objects.all(), required=False, help_text="Computer: ")
+	software = forms.ModelChoiceField(queryset=Software.objects.all(), help_text="Software ")
+	
+	class Meta:
+		model = Assign_Software
+		fields = ('add_to', 'faculty_computer', 'student_computer', 'software',)

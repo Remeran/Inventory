@@ -54,7 +54,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 		<a href="{% url 'add_lab_classroom' %}" {% if request.path == "/inventory_database/add_lab_classroom/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-building fa-fw"></i> Lab/Classroom</a>
 		<a href="/inventory_database/add_software/" {% if request.path == "/inventory_database/add_software/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-folder fa-fw"></i> Software</a>
 	</div>
-	<a href="/accounts/register/" {% if request.path == "/accounts/register" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-edit fa-fw"></i>Add User</a>
+	<a href="/inventory_database/assign_software/" {% if request.path == "/inventory_database/assign_software/" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-share-square-o"></i>Assign Software</a>
+	<a href="{% url 'registration_register' %}" {% if request.path == "/accounts/register" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-edit fa-fw"></i>Add User</a>
 	{% endif %}
 	<a href="/accounts/logout/" {% if request.path == "/accounts/logout" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-sign-out fa-fw"></i>Sign Out</a>
 	<a href="/accounts/password/change/" {% if request.path == "/accounts/logout" %}class="w3-bar-item w3-button w3-padding w3-blue"{% else %} class="w3-bar-item w3-button w3-padding "{% endif %}><i class="fa fa-sign-out fa-fw"></i>Change Password</a>

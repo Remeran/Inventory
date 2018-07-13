@@ -1,0 +1,26 @@
+{% extends "inventory_database/base.html" %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+<div class="w3-display-middle">
+	<header class="w3-container" style="padding-top:22px">
+	<h5><b><i class="fa fa-desktop"></i> Assign Software</b></h5>
+	<form id="assign_form" method="post" action="/inventory_database/assign_software/">
+		{% csrf_token %}
+		{% for hidden in form.hidden_fields %}
+			{{ hidden }}
+		{% endfor %}
+		{% for field in form.visible_fields %}
+		<p>
+			{{ field.errors }}
+			{{ field.help_text }}
+			{{ field|add_class:"w3-input w3-animate-input" }}
+		</p>
+		{% endfor %}
+		<button class="w3-btn w3-black" type="submit" name="submit" value="Assign Software" />Submit</button>
+	</form>
+</div>
+{% endblock content %}

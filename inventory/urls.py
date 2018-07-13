@@ -17,13 +17,20 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include
 from inventory_database import views
+from registration.backends.default.views import RegistrationView
+from inventory_database.regbackend import MyRegistrationView
 from django.conf import settings
 from django.conf.urls.static import static
+
+
+class MyRegistrationView(RegistrationView): 
+	def get_success_url(self, user):
+		return '/inventory_database/'
 
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
 	url(r'^inventory_database/', include('inventory_database.urls')),
 	url(r'^admin/', admin.site.urls),
-	url(r'^accounts/register/$', views.UserProfileRegistration.as_view(), name='registration_register'),
-	url(r'^accounts/', include('registration.backends.simple.urls')),
+	url(r'^accounts/', include('registration.backends.default.urls')),
+	url(r'^accounts/register/', views.UserProfileRegistration.as_view(), name='registration_register'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
