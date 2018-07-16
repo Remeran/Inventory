@@ -10,7 +10,7 @@
 </div> 
 <div id="Info" class="tab w3-animate-right">	
 	<header class="w3-container" style="padding-top:22px">
-		<h5><b><i class="fa fa-desktop"></i> {{ Asset.name }} </b> <a id="delete" onclick="confirmDel()" href=# />Delete</a></h5>
+		<h5><b><i class="fa fa-desktop"></i> {{ Asset.name }} </b> {% if user.get_username in editors %}<a id="delete" onclick="confirmDel()" href=# />Delete</a>{% endif %}</h5>
 	</header>
 	{% if Asset %}
 		{% if user.get_username not in editors %}

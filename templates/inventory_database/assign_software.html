@@ -16,11 +16,27 @@
 		{% for field in form.visible_fields %}
 		<p>
 			{{ field.errors }}
-			{{ field.help_text }}
 			{{ field|add_class:"w3-input w3-animate-input" }}
 		</p>
 		{% endfor %}
 		<button class="w3-btn w3-black" type="submit" name="submit" value="Assign Software" />Submit</button>
 	</form>
 </div>
+<script>
+function Hide() {
+	if(document.getElementById('id_add_to').options[document.getElementById('id_add_to').selectedIndex].value == '1') {
+		document.getElementById('id_faculty_computer').style.display = '';
+		document.getElementById('id_student_computer').style.display = 'none';	
+	}
+	if(document.getElementById('id_add_to').options[document.getElementById('id_add_to').selectedIndex].value == '2') {
+		document.getElementById('id_faculty_computer').style.display = 'none';
+		document.getElementById('id_student_computer').style.display = '';	
+	}
+};
+window.onload = function() {
+    document.getElementById('id_add_to').onchange = Hide;
+    document.getElementById('id_faculty_computer').style.display = '';
+    document.getElementById('id_student_computer').style.display = 'none';
+};
+</script>
 {% endblock content %}
