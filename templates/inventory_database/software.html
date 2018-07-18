@@ -59,7 +59,11 @@
 		<td><b>Installed on: </b></td>
 		<td>
 			{% for computer in software_list %}
+			{% if computer.faculty_computer %}
 			 <b>|</b> {{ computer.faculty_computer }} <b>|</b>
+			{% else %}
+			 <b>|</b> {{ computer.student_computer }} <b>|</b>
+			{% endif %}
 			{% endfor %}
 		</td>
 	</tr>

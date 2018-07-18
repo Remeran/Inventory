@@ -47,6 +47,34 @@
 		</tr>
 		{% endif %}
 		</table>
+<div id="Software" class="tab w3-animate-right" style="display:none">	
+	<header class="w3-container" style="padding-top:22px">
+		<h5><b><i class="fa fa-share-square-o"></i> {{ Asset.name }} </b></h5>
+	</header>
+	{% if software %}
+		<table class="w3-table w3-striped w3-white w3-hoverable">
+		<tr>
+		<th><b>Software</b></th>
+		</tr>
+		{% if user.get_username not in editors %}
+		{% for software in software %}
+		<tr>
+		<td>{{ software.software }}</td>
+		</tr>
+		{% endfor %}
+		{% else %}
+		{% for software in software %}
+		<tr>
+		<td>{{ software.software }} <a id="delete" href="{% url 'delete_software' software.id %}" /> Remove</a></td>
+		</tr>
+		{% endfor %}
+		</table>
+</div>
+		{% endif %}
+	{% else %}
+		This asset has no assigned software!
+	{% endif %}
+</div>
 		{% else %}
 		<form id="asset_form" method="post" action="{% url 'show_asset' Asset.slug %}">
 		{% csrf_token %}
